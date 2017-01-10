@@ -1,0 +1,17 @@
+/*
+DART450
+Week 01
+Colour Change CSS
+Just some very basic styling of the text
+*/
+
+body {
+	margin: 50px;
+}
+
+#text {
+	font-family: Helvetica, sans-serif;
+	font-size: 8em;
+	font-weight: bold;
+	color: black;
+}
