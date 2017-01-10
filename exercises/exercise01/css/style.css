@@ -1,17 +1,38 @@
-/*
-DART450
-Week 01
-Colour Change CSS
-Just some very basic styling of the text
-*/
+
 
 body {
-	margin: 50px;
+	margin: 60px;
 }
 
 #text {
 	font-family: Helvetica, sans-serif;
 	font-size: 8em;
 	font-weight: bold;
-	color: black;
+  
+
+}
+
+#end {
+  margin-right: .5em;
+
+}
+
+.one {
+  color: #ff3d70;
+
+}
+
+.two {
+  color: #ffd53d;
+
+}
+
+.colorme {
+	animation-name: colorme;
+	animation-duration: .1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes colorme {
+	100% { color: #ddd; }
 }
