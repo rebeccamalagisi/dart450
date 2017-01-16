@@ -1,14 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Kelly+Slab');
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Subrayada:400,700');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i');
 
 
 body {
 	margin: 60px;
+
 }
 
-#text {
-	font-family: Helvetica, sans-serif;
-	font-size: 8em;
-	font-weight: bold;
-  
+.text1 {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 8.5em;
+	font-weight: 700;
+	letter-spacing: -15px;
+	color:#ccc;
+	text-transform: uppercase;
+
+
+
+
+
+}
+
+.text2 {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 8.5em;
+	font-weight: 700;
+	letter-spacing: -15px;
+	color:#ccc;
+	text-transform: uppercase;
+
 
 }
 
@@ -17,22 +41,32 @@ body {
 
 }
 
-.one {
+/* .one span {
   color: #ff3d70;
 
 }
 
-.two {
+.two span {
   color: #ffd53d;
 
-}
+} */
 
-.colorme {
-	animation-name: colorme;
-	animation-duration: .1s;
+.colorme1 {
+	animation-name: colorme1;
+	animation-duration: .2s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes colorme {
-	100% { color: #ddd; }
+@keyframes colorme1 {
+	100% { color: #ffd53d; }
+}
+
+.colorme2 {
+	animation-name: colorme2;
+	animation-duration: .2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes colorme2 {
+	100% { color: #a2dd00; }
 }
