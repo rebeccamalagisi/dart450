@@ -3,7 +3,12 @@
 $(document).ready(function() {
   // Set the starting opacity for the overlay, default is 1
   // The range is 0 to 1
-  var opacity = 0;
+  var opacity1 = 0;
+  var opacity2 = 0;
+  var opacity3 = 0;
+  var opacity4 = 0;
+  var opacity5 = 0;
+  var opacity6 = 0;
 
   // Set an interval at which the opacity changes
   var interval = 150;
@@ -22,13 +27,13 @@ $(document).ready(function() {
   // We'll use it on 'body' so it hears all keypresses.
   $('body').keypress(function (event) {
 
-    if (event.which == 103) {
+    if (event.which == 104) {
 
-      opacity = opacity + opacityIncrease;
+      opacity1 = opacity1 + opacityIncrease;
 
-      if (opacity > 1) {
+      if (opacity1 > 1) {
 
-        opacity = 1;
+        opacity1 = 1;
 
       }
 
@@ -38,17 +43,17 @@ $(document).ready(function() {
     }
 
 
-    if (event.which == 113) {
+    if (event.which == 116) {
 
 
-      opacity = opacity + opacityIncrease;
+      opacity2 = opacity2 + opacityIncrease;
       // Could also write this as:
       // opacity -= opacityDecrease;
 
       // Make sure opacity doesn't become a negative number
-      if (opacity > 1) {
+      if (opacity2 > 1) {
         // If opacity had become negative, set it back to 0
-        opacity = 1;
+        opacity2 = 1;
 
       }
 
@@ -56,17 +61,17 @@ $(document).ready(function() {
 
     }
 
-    if (event.which == 100) {
+    if (event.which == 101) {
 
 
-      opacity = opacity + opacityIncrease;
+      opacity3 = opacity3 + opacityIncrease;
       // Could also write this as:
       // opacity -= opacityDecrease;
 
       // Make sure opacity doesn't become a negative number
-      if (opacity > 1) {
+      if (opacity3 > 1) {
         // If opacity had become negative, set it back to 0
-        opacity = 1;
+        opacity3 = 1;
 
       }
 
@@ -77,14 +82,14 @@ $(document).ready(function() {
     if (event.which == 99) {
 
 
-      opacity = opacity + opacityIncrease;
+      opacity4 = opacity4 + opacityIncrease;
       // Could also write this as:
       // opacity -= opacityDecrease;
 
       // Make sure opacity doesn't become a negative number
-      if (opacity > 1) {
+      if (opacity4 > 1) {
         // If opacity had become negative, set it back to 0
-        opacity = 1;
+        opacity4 = 1;
 
       }
 
@@ -92,17 +97,17 @@ $(document).ready(function() {
 
     }
 
-    if (event.which == 110) {
+    if (event.which == 112) {
 
 
-      opacity = opacity + opacityIncrease;
+      opacity5 = opacity5 + opacityIncrease;
       // Could also write this as:
       // opacity -= opacityDecrease;
 
       // Make sure opacity doesn't become a negative number
-      if (opacity > 1) {
+      if (opacity5 > 1) {
         // If opacity had become negative, set it back to 0
-        opacity = 1;
+        opacity5 = 1;
 
       }
 
@@ -110,17 +115,17 @@ $(document).ready(function() {
 
     }
 
-    if (event.which == 108) {
+    if (event.which == 115) {
 
 
-      opacity = opacity + opacityIncrease;
+      opacity6 = opacity6 + opacityIncrease;
       // Could also write this as:
       // opacity -= opacityDecrease;
 
       // Make sure opacity doesn't become a negative number
-      if (opacity > 1) {
+      if (opacity6 > 1) {
         // If opacity had become negative, set it back to 0
-        opacity = 1;
+        opacity6 = 1;
 
       }
 
@@ -142,56 +147,78 @@ $(document).ready(function() {
 
 
 
-    // The first thing we do is increase the opacity because
-    // its default behaviour is to become opaque
-    opacity = opacity - opacityDecrease;
-    // Could write:
-    // opacity += opacityIncrease;
 
-    // Make sure the opacity doesn't go above 1 in the same
-    // way we made sure it didn't go below 0
-    if (opacity < 0) {
-      opacity = 0;
+    opacity1 = opacity1 - opacityDecrease;
+
+    if (opacity1 < 0) {
+      opacity1 = 0;
     }
 
-    // Now we need to create a string to set the background color
-    // of our overlay with the appropriate alpha value
-    //
-    // You can do "addition" with strings of text, where the + means
-    // that you turn the two strings into one string joined together.
-    // We can use that to create the "rgba(red,green,blue,alpha)"
-    // format that CSS expects for a color.
-    //
-    // Importantly, we can use our VARIABLE opacity as part of the
-    // string we're making up to allow it to set the alpha as follows:
-    var textColor = "rgba(0,0,0," + opacity + ")"
-    // If opacity is, say 0.8, backgroundColor will be set to
-    // "rgba(255,255,255,0.8)"
+    opacity2 = opacity2 - opacityDecrease;
 
-    // Finally we need to set the actual CSS property of the overlay
-    // div with our new background colour...
+    if (opacity2 < 0) {
+      opacity2 = 0;
+    }
+
+    opacity3 = opacity3 - opacityDecrease;
+
+    if (opacity3 < 0) {
+      opacity3 = 0;
+    }
+
+    opacity4 = opacity4 - opacityDecrease;
+
+    if (opacity4 < 0) {
+      opacity4 = 0;
+    }
+
+    opacity5 = opacity5 - opacityDecrease;
+
+    if (opacity5 < 0) {
+      opacity5 = 0;
+    }
+
+    opacity6 = opacity6 - opacityDecrease;
+
+    if (opacity6 < 0) {
+      opacity6 = 0;
+    }
+
+
+
+
+
+
+    var textColor1 = "rgba(0,0,0," + opacity1 + ")"
+    var textColor2 = "rgba(0,0,0," + opacity2 + ")"
+    var textColor3 = "rgba(0,0,0," + opacity3 + ")"
+    var textColor4 = "rgba(0,0,0," + opacity4 + ")"
+    var textColor5 = "rgba(0,0,0," + opacity5 + ")"
+    var textColor6 = "rgba(0,0,0," + opacity6 + ")"
+
+
     $('#one').css({
-      "color": textColor
+      "color": textColor1
     });
 
     $('#two').css({
-      "color": textColor
+      "color": textColor2
     });
 
     $('#three').css({
-      "color": textColor
+      "color": textColor3
     });
 
     $('#four').css({
-      "color": textColor
+      "color": textColor4
     });
 
     $('#five').css({
-      "color": textColor
+      "color": textColor5
     });
 
     $('#six').css({
-      "color": textColor
+      "color": textColor6
     });
 
 
