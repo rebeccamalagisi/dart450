@@ -3,7 +3,7 @@
 $(document).ready(function() {
   // Set the starting opacity for the overlay, default is 1
   // The range is 0 to 1
-  var opacity = 1;
+  var opacity = 0;
 
   // Set an interval at which the opacity changes
   var interval = 150;
@@ -12,7 +12,7 @@ $(document).ready(function() {
   var opacityDecrease = 0.1;
 
   // Set the amount opacity should increase each interval
-  var opacityIncrease = 0.3;
+  var opacityIncrease = 0.2;
 
 
 
