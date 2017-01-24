@@ -24,7 +24,6 @@ $(document).ready(function() {
 
     if (event.which == 103) {
 
-
       opacity = opacity + opacityIncrease;
 
       if (opacity > 1) {
@@ -32,6 +31,8 @@ $(document).ready(function() {
         opacity = 1;
 
       }
+
+
 
 
     }
