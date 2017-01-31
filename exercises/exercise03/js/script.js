@@ -11,13 +11,10 @@ code from myself.
 
 // The total number of images we'll add to the page
 // is going to be a random integer between 0 and 99
-const TOTAL_IMAGES = randomIntegerInRange(0,100);
+const TOTAL_IMAGES = randomIntegerInRange(0,40);
 
 // We have 7 images availabe in our images/ directory
-const AVAILABLE_IMAGES = 9;
-
-// We hide the page sometimes after a delay
-const HIDE_DELAY = 2000;
+const AVAILABLE_IMAGES = 21;
 
 
 $(document).ready(function() {
@@ -37,15 +34,7 @@ $(document).ready(function() {
   if (r < 0.1) {
     // 25% of the time we just don't do anything
   }
-  else if (r < 0.5) {
-    // Another 25% of the time we'll hide the contents of the
-    // webpage after 5 seconds.
-    // Note that this is 25% of the time because we've already
-    // accounted for 25% of the time in the first conditional.
-    setTimeout(function () {
-      $('body').hide();
-    },HIDE_DELAY);
-  }
+
   else {
     // The other 50% of the time we'll mess up the page
     messUpPage();
@@ -80,7 +69,7 @@ function messUpPage() {
   // We'll use a for loop to count up to the total number of images
   // we want to add to the page and run the code for adding them
   for (var i = 0; i < TOTAL_IMAGES; i++) {
-    var img = createRandomImage();
+    var img = generateRandomImage();
     $('body').append(img);
   }
 }
@@ -103,18 +92,19 @@ function titleClicked() {
 // based on a number in its file name, gives it a random location
 // with top and left and a random rotation using another function.
 
-function createRandomImage() {
+function generateRandomImage() {
 
   // First we choose a random number for the image to use
   // (This only works because we numbered the image filenames)
   var imageNumber = randomIntegerInRange(0,AVAILABLE_IMAGES);
 
   // Now we create the string that points to the location of the image
-  var imageSource = "images/image" + imageNumber + ".png";
+  var imageSource = "images/image" + imageNumber + ".jpg";
 
   // Now we generate a random x and y location for the image to display
   var imageX = randomIntegerInRange(0,$(document).width());
   var imageY = randomIntegerInRange(0,$(document).height());
+  var randomOpacityInRange = randomIntegerInRange(0,1);
 
   // Now we generate the actual image element with jQuery, building in
   // the location of the image for the src property
@@ -125,11 +115,12 @@ function createRandomImage() {
   // Then use CSS to set its location with top and left
   img.css({
     top: imageY + 'px',
-    left: imageX + 'px'
+    left: imageX + 'px',
+    color: 'rgba(255, 255, 255,' + randomOpacityInRange + ')'
   });
 
   // Randomly rotate the image using our function
-  randomRotate(img,-30,30);
+  randomRotate(img,-180,180);
 
   // Return the image we created
   return img;
