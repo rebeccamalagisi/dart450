@@ -1,70 +1,105 @@
-/*
 
-Ugly
-Pippin Barr
 
-Some code to uglify our webpage. Heavy use of Math.random() to generate
-random rotations and to select random images. Uses functions to hide
-code from myself.
-
-*/
-
-// The total number of images we'll add to the page
-// is going to be a random integer between 0 and 99
+// Image range displayed in webpage
 const TOTAL_IMAGES = randomIntegerInRange(0,40);
 
-// We have 7 images availabe in our images/ directory
 const AVAILABLE_IMAGES = 21;
+
+const NUM_RANDOM_CIRCLES = 8;
 
 
 $(document).ready(function() {
 
-  // Here we're going to use Math.random() to control the
-  // probability of different outcomes.
-  // Because Math.random() gives us a random number between 0 and 1
-  // it's like a probability. In theory, the number that comes out
-  // is less than 0.25 25% of the time, less than 0.5 50% of the time,
-  // less than 1.0 100% of the time, and so on. We can use that to
-  // do thing probabilistically.
-  //
-  // First we get a random number
-  var r = Math.random();
+  setTimeout(function () {
+        window.location.reload();
+  }, 3000);
 
-  // Now we check what it is less than to choose what to do.
-  if (r < 0.1) {
-    // 25% of the time we just don't do anything
+
+  messUpPage();
+
+
+  $('#title').each(function () {
+    titleChange($(this));
+  });
+
+
+  // We're going to generate some randomly positioned rectangles, and
+  // this is how many we'll generate
+
+  for (var i = 0; i < NUM_RANDOM_CIRCLES; i++) {
+
+    // Math.random() returns a random floating point number between 0 and 1
+    // $(document).width() and $(document).height() return the width and
+    // height of the current document respectively
+    //
+    // So if we multiply the width by a random number between 0 and 1 we
+    // get a random position from the left to the right of the page
+    var x = Math.random() * $(document).width();
+
+    // And if we multiply the height by a random number between 0 and 1
+    // we get a random position from the top to the bottom of the page
+    var y = Math.random() * $(document).height();
+
+    // And we can generate a rectangle at that position
+    var c = generateCircle(x,y);
+
+    // And then add it to the page
+    $('body').append(c);
+
   }
 
-  else {
-    // The other 50% of the time we'll mess up the page
-    messUpPage();
-  }
 });
 
 
+
+
+// Title
+
+function titleChange(element) {
+  var sizeChange = randomIntegerInRange(0,800);
+  var randomRedValue = randomIntegerInRange(0,255);
+  var randomBlueValue = randomIntegerInRange(0,255);
+  var randomGreenValue = randomIntegerInRange(0,255);
+
+  element.css({
+    fontSize: sizeChange + 'px',
+    color: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',0.5)'
+  });
+
+}
+
+
+// Circles
+
+function generateCircle(x, y) {
+
+  var circleDiv = $('<div></div>');
+  var randomRedValue = randomIntegerInRange(0,255);
+  var randomBlueValue = randomIntegerInRange(0,255);
+  var randomGreenValue = randomIntegerInRange(0,255);
+  // var w = randomIntegerInRange(0,500);
+  // var h = randomIntegerInRange(0,500);
+
+  circleDiv.css({
+    position: 'absolute',
+    zIndex: '0',
+    width: '120px',
+    height: '120px', 
+    top: y + 'px',
+    left: x + 'px', 
+    backgroundColor: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',0.5)',
+    borderRadius: '50%'
+
+  });
+
+  return circleDiv;
+
+}
+
 // messUpPage()
-//
-// Applies a bunch of random numbers and images to the page to make
-// it a big mess
 
 function messUpPage() {
-  // This is one nice use of a function to make things a bit
-  // less confusing. Instead of putting an "anonymous function"
-  // in as a parameter, we can just put in the name of a function
-  // we have defined elsewhere with a sensible name
-  $("#title").click(titleClicked);
-  // Now our titleClicked() function will be called whenever someone
-  // clicks the title!
 
-  // We will randomly rotate each line of the poem by selecting the
-  // class and using jQuery's .each() which is effectively a LOOP
-  // that applies the function for each element it finds with the class
-
-  $('.line').each(function () {
-    // We will randomly rotate each line found by between -45 and 45 degrees
-    // using a function we've defined to do that
-    randomRotate($(this),-45,45);
-  });
 
   // We'll use a for loop to count up to the total number of images
   // we want to add to the page and run the code for adding them
@@ -74,29 +109,15 @@ function messUpPage() {
   }
 }
 
-// titleClicked()
-//
-// This is an event handling function that is called when the user
-// clicks on the title. It rotates the title.
 
-function titleClicked() {
-  // Use our rotation function to rotate the title
-  // Note that we're still able to pass in the jQuery $(this) object
-  // to get the element on the page that was clicked
-  randomRotate($(this),-20,20);
-}
 
-// createRandomImage()
-//
-// A function that chooses a random image from the images/ folder
-// based on a number in its file name, gives it a random location
-// with top and left and a random rotation using another function.
+// Images
 
 function generateRandomImage() {
 
   // First we choose a random number for the image to use
   // (This only works because we numbered the image filenames)
-  var imageNumber = randomIntegerInRange(0,AVAILABLE_IMAGES);
+  var imageNumber = randomIntegerInRange(1,AVAILABLE_IMAGES);
 
   // Now we create the string that points to the location of the image
   var imageSource = "images/image" + imageNumber + ".jpg";
@@ -130,6 +151,9 @@ function generateRandomImage() {
 //
 // This function takes a jQuery element and changes its CSS to rotate
 // it by a random positive number up to the specified maximum, in degrees.
+
+
+
 
 function randomRotate(element,min,max) {
 

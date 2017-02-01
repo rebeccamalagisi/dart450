@@ -1,26 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Cherry+Cream+Soda');
 
 
 
 
-html, body {
+body {
   height:100%;
-}
+  background: #000;
 
-#poem {
-  font-size: 1em;
-  padding: 2em;
-  line-height: 1.5em;
 }
 
 #title {
-  font-size: 2em;
-  font-weight: bold;
-  padding-bottom: 0.5em;
+  font-family: 'Cherry Cream Soda', cursive;
+  font-size: 96px;
+  position: fixed;
+  z-index: 10;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  color:#ddd;
+
+
 }
 
-.line {
-
-}
 
 .image {
   position: absolute;
