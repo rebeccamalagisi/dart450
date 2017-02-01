@@ -125,7 +125,7 @@ function generateRandomImage() {
   // Now we generate a random x and y location for the image to display
   var imageX = randomIntegerInRange(0,$(document).width());
   var imageY = randomIntegerInRange(0,$(document).height());
-  var randomOpacityInRange = randomIntegerInRange(0,1);
+
 
   // Now we generate the actual image element with jQuery, building in
   // the location of the image for the src property
@@ -137,7 +137,6 @@ function generateRandomImage() {
   img.css({
     top: imageY + 'px',
     left: imageX + 'px',
-    color: 'rgba(255, 255, 255,' + randomOpacityInRange + ')'
   });
 
   // Randomly rotate the image using our function
