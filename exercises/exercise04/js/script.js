@@ -5,11 +5,11 @@
 $(document).keypress(function(){
 
 
-
   $('body').append(playJack);
 
-
-
+  $('body').each(function () {
+    generateColor($(this));
+  });
 
 
 });
@@ -19,14 +19,33 @@ $(document).keypress(function(){
 
 
 
-
-
 function playJack () {
 
-  var myArray = ["all ", "work ", "and ", "no ", "play ", "makes ", "jack ", "a ", "dull ", "boy "];
+  var myText = ["all ", "work ", "and ", "no ", "play ", "makes ", "jack ", "a ", "dull ", "boy "];
 
 
-  return myArray;
+  return myText;
 
+}
+
+
+
+function generateColor (element) {
+
+  var bgColor = ['cyan', 'green', 'yellow', 'orange', 'gray', 'blue', 'purple']
+  var randomColor = bgColor[Math.floor(Math.random() * bgColor.length)];
+
+
+  element.css({
+    'background-color': randomColor
+  });
+
+}
+
+
+
+function randomIntegerInRange(min,max) {
+
+  return Math.floor(Math.random() * (max - min)) + min;
 
 }
