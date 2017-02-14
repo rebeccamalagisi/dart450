@@ -2,12 +2,7 @@
 
 Whenever you click the button, a 'random' speech selection is said in response
 
-
-
 */
-
-
-
 
 
 
@@ -17,7 +12,7 @@ var speechReady = false;
 
 // The specific voice we want the computer to use
 // See: http://responsivevoice.org/text-to-speech-languages/
-var voice = 'US English Female';
+var voice = 'UK English Female';
 
 // The parameters for the voice in an object
 var voiceParameters = {
@@ -26,15 +21,21 @@ var voiceParameters = {
   volume: 1
 }
 
-var speechOne = "Sounds lame.";
 
-var speechTwo = "Boring.";
+var answers = [
+  "Sounds lame.",
+  "Boring.",
+  "I don't care.",
+  "Get a better hobby.",
+  "What a waste of time.",
+  "Loser.",
+  "That's stupid.",
+  "Trash.",
+  "You think that's fun?",
+  "How pathetic."
+];
 
-var speechThree = "I don't care.";
 
-var speechFour = "You need a better hobby.";
-
-var speechFive = "What a waste of time.";
 
 
 $(document).ready(function() {
@@ -43,11 +44,11 @@ $(document).ready(function() {
   // page is ready...
   responsiveVoice.OnVoiceReady = speechIsReady;
 
-  // We can have speech happen in reaction to different page
-  // events like clicks and keypresses, to make things more dynamic...
+
   $("button").click(function () {
     // say() is a function defined below
-    say("Sounds lame.");
+    // when the button is clicked, a random string in the array is spoken
+    say(getRandomString(answers));
   });
 
 });
@@ -61,19 +62,16 @@ function speechIsReady () {
   speechReady = true;
 }
 
-// say(text)
-//
-// Checks if speech is available and if it is, speaks the text given
-// with the parameters determined at the top of the script.
-function say (text) {
+
+// when the
+function say () {
   if (speechReady) {
-    responsiveVoice.speak(text,voice,voiceParameters);
+    responsiveVoice.speak(getRandomString(answers),voice,voiceParameters);
   }
 }
 
 
-function randomIntegerInRange(min,max) {
-
-  return Math.floor(Math.random() * (max - min)) + min;
-
+function getRandomString(array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
 }
