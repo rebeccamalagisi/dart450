@@ -8,8 +8,8 @@ Some description of the CSS styling
 */
 
 body {
-  top:0px;
-  left:0px;
+  height:100%;
+  font-family: sans-serif;
 
 }
 
@@ -20,7 +20,25 @@ body {
   background-color: blue;
   top:100px;
   left:100px;
+  border-radius: 50%;
 
 
+
+}
+
+
+
+#timer {
+  position: absolute;
+  top:20px;
+  right: 20px;
+  font-size: 32px;
+  font-weight: bold;
+
+  /*display:none;*/
+}
+
+#popup1 {
+  display:none;
 
 }
