@@ -19,7 +19,7 @@ var speechReady = false;
 
 // The specific voice we want the computer to use
 // See: http://responsivevoice.org/text-to-speech-languages/
-var voice = 'UK English Female';
+var voice = 'UK English Male';
 
 // The parameters for the voice in an object
 var voiceParameters = {
@@ -28,9 +28,15 @@ var voiceParameters = {
   volume: 1
 }
 
-
 var answers = [
-  "Wasting time",
+  "Shouldn't you be doing something more productive with your time?",
+  "Don't you have something more inportant to do?",
+  "",
+  "Shouldn't you be doing something more productive with your time?",
+  "Shouldn't you be doing something more productive with your time?",
+  "Shouldn't you be doing something more productive with your time?",
+  "Shouldn't you be doing something more productive with your time?",
+  "Shouldn't you be doing something more productive with your time?",
 
 ];
 
@@ -40,6 +46,7 @@ var answers = [
 // DOCUMENT.READY
 
 $(document).ready(function() {
+  responsiveVoice.OnVoiceReady = speechIsReady;
 
 
   $("#one").click(function(){
@@ -58,16 +65,18 @@ $(document).ready(function() {
 
   setInterval(function () {
 
+
     // Set the text on the page to be the value of the counter
     $("#timer").text(counter);
-
+      // Adds 1 to counter/timer every second
       counter++;
 
       // Pop up element to let you know when a minute has passed
       if (counter == 10) {
-        // say(getRandomString(answers));
-        $("#popup1").show();
+        sayOne("Congratulations, you just wasted a minute of your life.");
         
+        console.log("speech is okay");
+
 
 
       }
@@ -75,7 +84,6 @@ $(document).ready(function() {
 
   },interval);
 
-  // responsiveVoice.OnVoiceReady = speechIsReady;
 
 });
 
@@ -89,7 +97,13 @@ function speechIsReady () {
 
 
 // when the
-function say () {
+function sayOne (text) {
+  if (speechReady) {
+    responsiveVoice.speak(text,voice,voiceParameters);
+  }
+}
+
+function sayTwo () {
   if (speechReady) {
     responsiveVoice.speak(getRandomString(answers),voice,voiceParameters);
   }

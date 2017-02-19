@@ -7,9 +7,11 @@ Some description of the CSS styling
 
 */
 
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700');
+
 body {
   height:100%;
-  font-family: sans-serif;
+  font-family: 'Hind', sans-serif;
 
 }
 
@@ -36,9 +38,4 @@ body {
   font-weight: bold;
 
   /*display:none;*/
-}
-
-#popup1 {
-  display:none;
-
 }
