@@ -7,6 +7,12 @@ Some description of the CSS styling
 
 */
 
+body {
+  top:0px;
+  left:0px;
+
+}
+
 #one {
   position: absolute;
   height:200px;

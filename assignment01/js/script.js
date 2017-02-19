@@ -14,7 +14,7 @@ $(document).ready(function() {
   $("#one").click(function(){
     $(this).animate({'left': '+=200px'}, 200);
 
-  
+
 
   });
   // Write code in here that will run when the document is loaded
