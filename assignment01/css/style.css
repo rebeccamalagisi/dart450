@@ -1,8 +1,20 @@
 /*
 
-Title of project
-Author's name
+Assignment 01 - Interactive Personality
+Rebecca Malagisi
 
 Some description of the CSS styling
 
 */
+
+#one {
+  position: absolute;
+  height:200px;
+  width:200px;
+  background-color: blue;
+  top:100px;
+  left:100px;
+
+
+
+}
