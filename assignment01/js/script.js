@@ -60,13 +60,14 @@ $(document).ready(function() {
 
       // Speech element to let you know when a minute has passed
       if (counter == 10) {
-        sayOne("Congratulations, you just wasted a minute of your life.");
+        sayOne("You just wasted a minute of your life.");
         console.log("speech is okay");
 
       }
 
       else if (counter > 10) {
-        console.log("right on, pal");
+
+          console.log("right on, pal");
 
 
       }
@@ -96,8 +97,7 @@ $(document).ready(function() {
 
   $('div').click(function(){
     $(this).animate({
-      'height': '0px',
-      'width': '0px'
+      'left': '+=200px'
     }, 100);
 
     console.log("clicky");
@@ -169,8 +169,8 @@ function generateCircle(x, y) {
     height: '260px', 
     top: y + 'px',
     left: x + 'px', 
-    backgroundColor: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',0.5)'
-  
+    backgroundColor: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',1)'
+
 
   });
 
