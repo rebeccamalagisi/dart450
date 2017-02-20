@@ -21,7 +21,7 @@ var timeInterval = 1000;
 
 // SPEECH VARS
 var speechReady = false;
-var voice = 'UK English Male';
+var voice = 'US English Female';
 var voiceParameters = {
   pitch: 0.9,
   rate: 1,
@@ -128,6 +128,31 @@ $(document).ready(function() {
       else if (counter == 225) {
         sayTwo(answers);
         console.log("225 working");
+      }
+
+      else if (counter == 240) {
+        sayTwo(answers);
+        console.log("240 working");
+      }
+
+      else if (counter == 255) {
+        sayTwo(answers);
+        console.log("255 working");
+      }
+
+      else if (counter == 270) {
+        sayTwo(answers);
+        console.log("270 working");
+      }
+
+      else if (counter == 285) {
+        sayTwo(answers);
+        console.log("285 working");
+      }
+
+      else if (counter == 300) {
+        sayTwo(answers);
+        console.log("300 working");
       }
 
   },timeInterval);
