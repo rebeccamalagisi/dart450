@@ -22,7 +22,7 @@ div {
   width:200px;
   background-color: blue;
 
-  /*border-radius: 50%;*/
+  border-radius: 50%;
   display: inline-block;
   z-index: 10;
 
