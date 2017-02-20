@@ -3,7 +3,8 @@
 Assignment 01 - Interactive Personality
 Rebecca Malagisi
 
-Some description of the CSS styling
+Not much here.
+Some general css to things that aren't visible.
 
 */
 
@@ -15,21 +16,6 @@ body {
   background-color: ghostwhite;
 
 }
-
-/*div {
-  position: absolute;
-  height:200px;
-  width:200px;
-  background-color: blue;
-
-  border-radius: 50%;
-  display: inline-block;
-  z-index: 10;
-
-
-
-}*/
-
 
 
 #timer {

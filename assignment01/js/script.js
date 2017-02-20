@@ -9,15 +9,17 @@ Click on the squares to clear them, but it may be harder than it seems.
 After the first minute you will get an update stating how much time you've wasted.
 Afterwards, you will receive a random message from an array of choices every 20 seconds.
 
+~~~ THIS IS WHERE THE MAGIC HAPPENS ~~~
+
 */
 
 
-
+// TIMER VARS
 var counter = 0;
 // Time interval for the timer
 var timeInterval = 1000;
 
-// A global variable to store whether speech is ready to be used
+// SPEECH VARS
 var speechReady = false;
 var voice = 'UK English Male';
 var voiceParameters = {
@@ -57,22 +59,22 @@ $(document).ready(function() {
   responsiveVoice.OnVoiceReady = speechIsReady;
 
 
-  // TIME INTERVAL
+  // SPEECH TIME INTERVAL
   setInterval(function () {
-
 
     // Set the text on the page to be the value of the counter
     $("#timer").text(counter);
       // Adds 1 to counter/timer every second
       counter++;
 
-      // Speech element to let you know when a minute has passed
+      // IF speech element to let you know when a minute has passed
       if (counter == 60) {
         sayOne("You just wasted a minute of your life.");
         console.log("speech is okay");
 
       }
 
+      // ELSE IF speech elements every 15 seconds after first minute with additional phrases
       else if (counter == 75) {
         sayTwo(answers);
         console.log("right on, pal");
@@ -98,10 +100,12 @@ $(document).ready(function() {
         console.log("right on, pal");
       }
 
-
   },timeInterval);
 
-  // CIRCLE INTERVAL
+
+
+
+  // RECT INTERVAL
   setInterval(function () {
     for (var i = 0; i < NUM_RANDOM_RECTS; i++) {
 
@@ -137,7 +141,7 @@ $(document).ready(function() {
 
 
 
-      // And then add it to the page
+      // Adding the divs to the page
       $('body').append(rect);
 
 
@@ -197,13 +201,16 @@ function getRandomString(array) {
 
 function generateRect(x, y) {
 
+  // Making divs
   var rectDiv = $('<div></div>');
+  // Div variables
   var w = randomIntegerInRange(60,500);
   var h = randomIntegerInRange(60,500);
   var randomRedValue = randomIntegerInRange(0,255);
   var randomBlueValue = randomIntegerInRange(0,255);
   var randomGreenValue = randomIntegerInRange(0,255);
 
+  // Styling the divs
   rectDiv.css({
     position: 'absolute',
     zIndex: '0',
@@ -216,6 +223,7 @@ function generateRect(x, y) {
 
   });
 
+  // Give me a div but don't show it on the webpage until I append it in the document.ready
   return rectDiv;
 
 }
