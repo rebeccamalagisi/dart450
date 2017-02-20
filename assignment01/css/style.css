@@ -12,17 +12,18 @@ Some description of the CSS styling
 body {
   height:100%;
   font-family: 'Hind', sans-serif;
+  background-color: ghostwhite;
 
 }
 
-#one {
-  position: absolute;
+div {
+  /*position: absolute;*/
   height:200px;
   width:200px;
   background-color: blue;
-  top:100px;
-  left:100px;
+  
   border-radius: 50%;
+  display: inline-block;
 
 
 
