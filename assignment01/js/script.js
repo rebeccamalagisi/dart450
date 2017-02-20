@@ -36,8 +36,8 @@ var answers = [
 
 ];
 
-const NUM_RANDOM_CIRCLES = 10;
-const INTERVAL = 5000;
+const NUM_RANDOM_CIRCLES = 3;
+const INTERVAL = 3000;
 
 
 
@@ -76,34 +76,31 @@ $(document).ready(function() {
   setInterval(function () {
     for (var i = 0; i < NUM_RANDOM_CIRCLES; i++) {
 
-      // Math.random() returns a random floating point number between 0 and 1
-      // $(document).width() and $(document).height() return the width and
-      // height of the current document respectively
-      //
-      // So if we multiply the width by a random number between 0 and 1 we
-      // get a random position from the left to the right of the page
+      // Will give a random width position
       var x = Math.random() * $(document).width();
 
-      // And if we multiply the height by a random number between 0 and 1
-      // we get a random position from the top to the bottom of the page
+      // Will give a random height position
       var y = Math.random() * $(document).height();
 
-      // And we can generate a rectangle at that position
-      var c = generateCircle(x,y);
-
       // And then add it to the page
-      $('body').append(c);
+      $('body').append(generateCircle(x,y));
+
+
 
     }
 
   },INTERVAL);
 
 
-  $("div").click(function(){
+
+
+  $('div').click(function(){
     $(this).animate({
       'height': '0px',
       'width': '0px'
     }, 100);
+
+    console.log("clicky");
 
 
 
@@ -156,6 +153,8 @@ function getRandomString(array) {
 
 // SHAPE FUNCTIONS
 
+
+
 function generateCircle(x, y) {
 
   var circleDiv = $('<div></div>');
@@ -166,12 +165,12 @@ function generateCircle(x, y) {
   circleDiv.css({
     position: 'absolute',
     zIndex: '0',
-    width: '120px',
-    height: '120px', 
+    width: '260px',
+    height: '260px', 
     top: y + 'px',
     left: x + 'px', 
-    backgroundColor: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',0.5)',
-    borderRadius: '50%'
+    backgroundColor: 'rgba(' + randomRedValue + ',' + randomGreenValue + ',' + randomBlueValue + ',0.5)'
+  
 
   });
 
