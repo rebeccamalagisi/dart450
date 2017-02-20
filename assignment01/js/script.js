@@ -30,14 +30,14 @@ var answers = [
   "You're wasting time.",
   "Get back to work.",
   "Stop being lazy.",
-  "Shouldn't you be doing something more productive with your time?",
-  "Shouldn't you be doing something more productive with your time?",
-  "Shouldn't you be doing something more productive with your time?",
+  // "Shouldn't you be doing something more productive with your time?",
+  // "Shouldn't you be doing something more productive with your time?",
+  // "Shouldn't you be doing something more productive with your time?",
 
 ];
 
-const NUM_RANDOM_CIRCLES = 3;
-const INTERVAL = 3000;
+const NUM_RANDOM_SQUARES = 6;
+const INTERVAL = 2500;
 
 
 
@@ -75,7 +75,7 @@ $(document).ready(function() {
 
   // CIRCLE INTERVAL
   setInterval(function () {
-    for (var i = 0; i < NUM_RANDOM_CIRCLES; i++) {
+    for (var i = 0; i < NUM_RANDOM_SQUARES; i++) {
 
       // Will give a random width position
       var x = Math.random() * $(document).width();
@@ -83,8 +83,34 @@ $(document).ready(function() {
       // Will give a random height position
       var y = Math.random() * $(document).height();
 
+
+      var square = generateSquare(x,y);
+
+      // Add click to circle
+
+      // When mouse touches the squares, they will start to move down the page or 'run away' from the user
+      $('div').mouseover(function(){
+        $(this).animate({
+          'top': '+=80px'
+
+        }, 100);
+
+        console.log("clicky");
+
+      });
+
+      // Clicking on the squares will hide them
+      $('div').click(function(){
+        $(this).hide();
+
+        console.log("clicky");
+
+      });
+
+
+
       // And then add it to the page
-      $('body').append(generateCircle(x,y));
+      $('body').append(square);
 
 
 
@@ -95,16 +121,6 @@ $(document).ready(function() {
 
 
 
-  $('div').click(function(){
-    $(this).animate({
-      'left': '+=200px'
-    }, 100);
-
-    console.log("clicky");
-
-
-
-  });
 
 
 
@@ -155,14 +171,14 @@ function getRandomString(array) {
 
 
 
-function generateCircle(x, y) {
+function generateSquare(x, y) {
 
-  var circleDiv = $('<div></div>');
+  var squareDiv = $('<div></div>');
   var randomRedValue = randomIntegerInRange(0,255);
   var randomBlueValue = randomIntegerInRange(0,255);
   var randomGreenValue = randomIntegerInRange(0,255);
 
-  circleDiv.css({
+  squareDiv.css({
     position: 'absolute',
     zIndex: '0',
     width: '260px',
@@ -174,7 +190,7 @@ function generateCircle(x, y) {
 
   });
 
-  return circleDiv;
+  return squareDiv;
 
 }
 
