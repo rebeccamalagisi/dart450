@@ -2,7 +2,9 @@
 By Rebecca Malagisi
 
 Try to clear as many rectangles as possible by clicking them, but it may be harder than it seems. 
+
 *** Don’t forget to scroll.
+
 *** Use volume.
 
 /////////////////////////////////////////////////////////////////////////////////////////////
