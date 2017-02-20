@@ -33,11 +33,11 @@ body {
 
 
 #timer {
-  position: absolute;
+  position: fixed;
   top:20px;
   right: 20px;
   font-size: 32px;
   font-weight: bold;
 
-  /*display:none;*/
+  display:none;
 }
