@@ -37,7 +37,7 @@ var answers = [
 ];
 
 const NUM_RANDOM_SQUARES = 6;
-const INTERVAL = 2500;
+// const INTERVAL = randomIntegerInRange(1000,5000);
 
 
 
@@ -95,7 +95,7 @@ $(document).ready(function() {
 
         }, 100);
 
-        console.log("clicky");
+        console.log("weeeee");
 
       });
 
@@ -116,7 +116,7 @@ $(document).ready(function() {
 
     }
 
-  },INTERVAL);
+  },randomIntegerInRange(1000,5000));
 
 
 
