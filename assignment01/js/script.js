@@ -35,9 +35,9 @@ var answers = [
   "You're wasting time.",
   "Get back to work.",
   "Stop being lazy.",
-  "You'll regret procrastinating later."
-  // "Shouldn't you be doing something more productive with your time?",
-  // "Shouldn't you be doing something more productive with your time?",
+  "You'll regret procrastinating later.",
+  "Why aren't you working?",
+  "You have so much work to do. Why are you playing a game right now?"
 
 ];
 
@@ -77,27 +77,57 @@ $(document).ready(function() {
       // ELSE IF speech elements every 15 seconds after first minute with additional phrases
       else if (counter == 75) {
         sayTwo(answers);
-        console.log("right on, pal");
+        console.log("75 working");
       }
 
       else if (counter == 90) {
         sayTwo(answers);
-        console.log("right on, pal");
+        console.log("90 working");
       }
 
       else if (counter == 105) {
         sayTwo(answers);
-        console.log("right on, pal");
+        console.log("105 working");
       }
 
       else if (counter == 120) {
         sayTwo(answers);
-        console.log("right on, pal");
+        console.log("120 working");
       }
 
       else if (counter == 135) {
         sayTwo(answers);
-        console.log("right on, pal");
+        console.log("135 working");
+      }
+
+      else if (counter == 150) {
+        sayTwo(answers);
+        console.log("150 working");
+      }
+
+      else if (counter == 165) {
+        sayTwo(answers);
+        console.log("165 working");
+      }
+
+      else if (counter == 180) {
+        sayTwo(answers);
+        console.log("180 working");
+      }
+
+      else if (counter == 195) {
+        sayTwo(answers);
+        console.log("195 working");
+      }
+
+      else if (counter == 210) {
+        sayTwo(answers);
+        console.log("210 working");
+      }
+
+      else if (counter == 225) {
+        sayTwo(answers);
+        console.log("225 working");
       }
 
   },timeInterval);
