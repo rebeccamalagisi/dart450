@@ -1,0 +1,23 @@
+/*
+
+Attention Seeker
+Pippin Barr
+
+Just some styling you know.
+
+*/
+
+div {
+  position: absolute;
+  margin: 0.5em;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 96px;
+  opacity: 0;
+
+}
+
+#webcam {
+  position: absolute;
+  visibility: hidden;
+}
