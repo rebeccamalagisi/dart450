@@ -10,7 +10,7 @@ be happy or sad based on whether it can see someone or not.
 
 const INTERVAL = 100;
 // How fast the emoticon faces should fade in and out
-const ANIMATION_DURATION = 500;
+const ANIMATION_DURATION = 1000;
 
 const MAX_TIME_SINCE_FACE = 1000;
 // Track how long it has been since the page has seen a face,
