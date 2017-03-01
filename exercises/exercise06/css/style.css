@@ -15,10 +15,10 @@ body {
 
 div {
   position: absolute;
-  margin: 0.5em;
+  margin: 60px 20px;
   font-family: 'Inconsolata', monospace;
   font-weight: 400;
-  font-size: 96px;
+  font-size: 72px;
   opacity: 0;
   color: white;
 

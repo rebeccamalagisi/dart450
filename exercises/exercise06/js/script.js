@@ -24,16 +24,22 @@ var noStrings = [
   "I can't see you.",
   "Come back.",
   "I'm so lonely.",
-  "Why do you keep leaving me?"
+  "Why do you keep leaving me?",
+  "Don't be shy.",
+  "I wish you'd show me your face.",
+  "Please don't hide from me."
 ];
 var yesStrings = [
   "There you are.",
-  "I like your shirt.",
-  "Hey there.",
+  "Welcome back.",
+  "Hey there, good lookin'.",
   "I'm glad you're back.",
   "I missed you, pal.",
   "Stay with me for a while.",
-  "You look so serious."
+  "You look so serious.",
+  "You have nice eyes.",
+  "You're so intriguing to watch.",
+  "I wish I knew more about you."
 ];
 
 
