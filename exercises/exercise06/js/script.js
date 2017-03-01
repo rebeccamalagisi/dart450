@@ -20,25 +20,21 @@ var timeSinceFace = 1000000;
 var noStrings = [
   "Where are you?",
   "Where did you go?",
-  "I miss you!",
-  "Don't leave me alone...",
-  "Come back!",
+  "I miss you.",
+  "I can't see you.",
+  "Come back.",
   "Where have you gone?",
-  "Please don't leave me...",
-  "Don't abandon me!",
-  "I can't bear not seeing your face!",
-  "Return to me, lover!"
+  "Please don't leave me..."
+
 ];
 var yesStrings = [
   "There you are.",
   "You're so beautiful.",
-  "Gaze into my eyes.",
+  "Hey there good lookin'.",
+  "I'm glad you're back.",
   "Let's look at each other forever.",
-  "You complete me.",
-  "Let's stay like this forever.",
   "Never leave me.",
   "Say you'll never leave me.",
-  "It's like a dream just looking at you.",
   "I love you so much."
 ];
 

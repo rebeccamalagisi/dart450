@@ -6,14 +6,21 @@ Pippin Barr
 Just some styling you know.
 
 */
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700');
+
+body {
+  background-color: black;
+
+}
 
 div {
   position: absolute;
   margin: 0.5em;
-  font-family: sans-serif;
-  font-weight: bold;
+  font-family: 'Inconsolata', monospace;
+  font-weight: 400;
   font-size: 96px;
   opacity: 0;
+  color: white;
 
 }
 
