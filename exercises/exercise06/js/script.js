@@ -23,19 +23,17 @@ var noStrings = [
   "I miss you.",
   "I can't see you.",
   "Come back.",
-  "Where have you gone?",
-  "Please don't leave me..."
-
+  "I'm so lonely.",
+  "Why do you keep leaving me?"
 ];
 var yesStrings = [
   "There you are.",
-  "You're so beautiful.",
-  "Hey there good lookin'.",
+  "I like your shirt.",
+  "Hey there.",
   "I'm glad you're back.",
-  "Let's look at each other forever.",
-  "Never leave me.",
-  "Say you'll never leave me.",
-  "I love you so much."
+  "I missed you, pal.",
+  "Stay with me for a while.",
+  "You look so serious."
 ];
 
 
@@ -74,7 +72,7 @@ function handleVideo(stream) {
 // went wrong. Not very sophisticated.
 function videoError(e) {
   $('body').css({
-    'background-color': 'black'
+    'background-color': 'red'
   })
 }
 
