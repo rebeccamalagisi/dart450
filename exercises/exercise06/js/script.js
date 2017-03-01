@@ -10,7 +10,7 @@ be happy or sad based on whether it can see someone or not.
 
 const INTERVAL = 100;
 // How fast the emoticon faces should fade in and out
-const ANIMATION_DURATION = 1000;
+const ANIMATION_DURATION = 1500;
 
 const MAX_TIME_SINCE_FACE = 1000;
 // Track how long it has been since the page has seen a face,
@@ -32,7 +32,7 @@ var noStrings = [
 var yesStrings = [
   "There you are.",
   "Welcome back.",
-  "Hey there, good lookin'.",
+  "Hey there, friend.",
   "I'm glad you're back.",
   "I missed you, pal.",
   "Stay with me for a while.",
