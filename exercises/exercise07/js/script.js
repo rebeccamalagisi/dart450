@@ -37,7 +37,7 @@ function circleDown () {
 
   var sunset = new ScrollMagic.Scene({
     triggerElement: "#trigger1",
-    duration: 200000
+    duration: 100000
   });
 
   sunset.setTween("#trigger2", 0.5, {
@@ -70,12 +70,12 @@ function colorChange () {
 
   var sky = new ScrollMagic.Scene({
     triggerElement: "#trigger1",
-    duration: 200000
+    duration: 100000
   });
 
   var horizon = new ScrollMagic.Scene({
     triggerElement: "#trigger1",
-    duration: 200000
+    duration: 100000
   });
 
 
