@@ -1,7 +1,5 @@
 /*
 
-ScrollMagic with TweenMax
-Pippin Barr
 
 Basic styling.
 
@@ -35,7 +33,7 @@ body {
   position: fixed;
   background-color: lightskyblue;
   width:100%;
-  height:200px;
+  height:360px;
   top:85%;
 
 }
