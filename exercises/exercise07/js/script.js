@@ -52,7 +52,7 @@ function circleDown () {
   sunset.triggerHook(0.4);
 
   // Add the debugging indicators so we can see what's happening
-  sunset.addIndicators();
+  // sunset.addIndicators();
 
   // Add our scene to the controller so it actually does something
   sunset.addTo(controller);

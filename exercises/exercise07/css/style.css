@@ -12,6 +12,7 @@ body {
 
 #trigger1 {
   visibility: hidden;
+  height: 100000px;
 
 }
 
