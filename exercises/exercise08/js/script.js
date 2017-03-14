@@ -88,7 +88,7 @@ function handleAudio (stream) {
 //
 // If something goes wrong, panic!
 function audioError(e) {
-  $('#volume').css({
+  $('body').css({
     'background-color': 'red'
   })
 }
