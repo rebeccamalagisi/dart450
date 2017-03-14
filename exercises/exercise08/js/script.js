@@ -1,6 +1,7 @@
 /*
 
-Sound Blasting 01
+Webpal (subject to change)
+
 
 Animating the letters of some text according to the microphone volume.
 
