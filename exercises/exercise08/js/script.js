@@ -1,8 +1,8 @@
 /*
 
-Webpal (subject to change)
+Webpal (title subject to change)
 
-
+A site that shows itself when you talk to it.
 Animating the letters of some text according to the microphone volume.
 
 */
