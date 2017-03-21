@@ -12,7 +12,7 @@ var positions = {};
 
 
 
-var colours = ["red","green","blue","yellow"]
+var colours = ["red","green","blue","yellow","black"]
 
 
 $(document).ready(function() {
@@ -28,7 +28,7 @@ $(document).ready(function() {
   // Add the word class to each word so it looks like a magnet
   $('.blast').addClass('word');
 
-  $('.blast').dblclick(changeColour);
+  $('.blast').hover(changeColour);
 
   // Remember the width and height of the window so we can randomly
   // position (more efficient that calling the functions over and)
