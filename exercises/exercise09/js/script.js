@@ -1,13 +1,6 @@
 /*
 
-Magnetic Poetry
-Pippin Barr
-
-This script manages saving and loading data about the locations
-of our magenetic fridge poetry words on the screen, as well as
-setting up the words themselves to be draggable.
-
-It's relatively complicated, but hopefully the comments will help.
+Symbols
 
 */
 
@@ -15,6 +8,12 @@ It's relatively complicated, but hopefully the comments will help.
 // This is a variable to save the positions of all the words
 // in a JavaScript Object.
 var positions = {};
+
+
+
+
+var colours = ["red","green","blue","yellow"]
+
 
 $(document).ready(function() {
 
@@ -29,6 +28,8 @@ $(document).ready(function() {
   // Add the word class to each word so it looks like a magnet
   $('.blast').addClass('word');
 
+  $('.blast').dblclick(changeColour);
+
   // Remember the width and height of the window so we can randomly
   // position (more efficient that calling the functions over and)
   var width = $(window).width();
@@ -37,6 +38,7 @@ $(document).ready(function() {
   // Now try to load data from the user's computer that would tell us
   // where everything should go
   var positionsData = localStorage.getItem('positions');
+
 
   // Check if there was anything to load...
   if (positionsData) {
@@ -47,6 +49,10 @@ $(document).ready(function() {
 
     // Now we can use that data to position the words below
   }
+
+
+
+
 
   // Now we go through each of the words
   $('.blast').each(function (index) {
@@ -64,6 +70,9 @@ $(document).ready(function() {
       // Then we set x and y to the stored location
       x = positions[$(this).attr('id')].x;
       y = positions[$(this).attr('id')].y;
+      $(this).css({
+        color: positions[$(this).attr('id')].color
+      });
     }
     else {
       // Otherwise we choose a random location
@@ -73,7 +82,8 @@ $(document).ready(function() {
       // And save that location to the object
       positions[$(this).attr('id')] = {
         x: x,
-        y: y
+        y: y,
+        color: 'black'
       }
     }
 
@@ -96,6 +106,41 @@ $(document).ready(function() {
 
 });
 
+
+
+
+
+
+
+
+
+
+function changeColour () {
+  var newColor = colours[Math.floor(Math.random() * colours.length)];
+  $(this).css({
+    color: newColor
+  });
+  positions[$(this).attr('id')] = {
+    x: $(this).offset().left,
+    y: $(this).offset().top,
+    color: newColor
+  }
+
+  // Save the positions object to the computer. Note that we need to
+  // use JSON.stringify() to convert the object to a string so we
+  // can save it.
+  localStorage.setItem('positions',JSON.stringify(positions));
+
+}
+
+
+
+
+
+
+
+
+
 // savePosition
 //
 // Takes the current word and saves its location to the positions
@@ -106,7 +151,8 @@ function savePosition () {
   // the word is now (using offset())
   positions[$(this).attr('id')] = {
     x: $(this).offset().left,
-    y: $(this).offset().top
+    y: $(this).offset().top,
+    color: $(this).css('color')
   }
 
   // Save the positions object to the computer. Note that we need to
