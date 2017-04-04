@@ -51,9 +51,11 @@ $(document).ready(function() {
 
   awakeAsleep();
 
-  visitMe();
+  saveLocal();
 
 
+  // Calling the clearLocal storage function with keypress = reseting memory
+  $("body").keypress(clearLocal);
 
 
 
@@ -128,7 +130,7 @@ function awakeAsleep() {
   if (theHour >= 9 && theHour <= 19){
 
     // displays text in console to make sure if statement works
-    console.log("2 - Good morning");
+    console.log("2 - Awake");
 
     // white background
     $("body").css({
@@ -144,7 +146,7 @@ function awakeAsleep() {
   else {
 
     // displays text in console to make sure if statement works
-    console.log("2 - Good night");
+    console.log("2 - Asleep");
 
     // black background
     $("body").css({
@@ -229,49 +231,62 @@ function sadSquare (x, y) {
 
 ///////////////////////////////////////////////////////////////////////////
 
-// # OF VISITS SAVED TO LOCAL STORAGE
+// TIME OF LAST VISIT SAVED TO LOCAL STORAGE
 
+function saveLocal() {
 
-function visitMe() {
-
-  var memory;
+    var memory;
 
     // localStorage.clear();
 
+    // retrieve date and time data from computer and store in now variable
     var now = new Date();
 
+    // Memory var set to get the localStorage
     memory = localStorage.getItem('memory');
 
+    // If user has not visited before, new time NOW will be LASTVISIT
     if (memory == undefined) {
       memory = {
         lastVisit: now.getTime()
       }
     }
+    // Else, get find the data in memory
     else {
       memory = JSON.parse(memory);
     }
 
+
+
+    // getTime() retrieves time in milliseconds
     var nowMillis = now.getTime();
-
+    // Calculate time since last visit as timeAway var
     var timeAway = nowMillis - memory.lastVisit;
-
+    // Print this in the console
     console.log("Time away: ",timeAway);
 
+    // Calculate days as milliseconds divided by 1000 (milliseconds/second) divided by 60 (seconds/minute) divided by 60 (minutes/hour) divided by 24 (hours/day)
     var daysAway = timeAway/1000/60/60/24;
 
+    // IF there hasn't been a visit (no previous memory/timeAway)
     if (daysAway == 0) {
-      console.log("Who are you?");
+      console.log("Ooooohhhh a new person!");
     }
-    else if (daysAway < 0.0001) {
-      console.log("Leave me alone! I need some space!");
-    }
-    else if (daysAway > 1) {
-      console.log("Where WERE you?!");
-    }
-    else {
+    // ELSE IF not much time has passed
+    else if (daysAway > 0) {
       console.log("I love you so damn much.");
     }
+    // ELSE IF user has been gone for less than 1.5 days
+    else if (daysAway < 1.5) {
+      console.log("I'm so happy you're back!");
+    }
+    // ELSE user has been gone for over 1.5 days
+    else {
+      console.log("Where WERE you?!");
+    }
 
+
+    // each visit, replace the memory (lastVisit) as current time
     memory.lastVisit = now.getTime();
     localStorage.setItem('memory',JSON.stringify(memory));
 
@@ -279,6 +294,26 @@ function visitMe() {
 
 };
 
+
+///////////////////////////////////////////////////////////////////////////
+
+// CLEAR LOCAL STORAGE
+
+function clearLocal(event) {
+
+  // If the event number 32 aka space bar is keypress
+  if (event.which == 32) {
+
+    // Tell the console that it is reseting
+    console.log("RESET");
+
+    // And erase the memory
+    localStorage.clear();
+
+  }
+
+
+};
 
 
 
