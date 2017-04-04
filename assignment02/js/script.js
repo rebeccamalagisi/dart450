@@ -50,15 +50,18 @@ $(document).ready(function() {
 
 function careInstructions() {
 
+  // displays text in console to make sure function works
+  console.log("1 - Care instructions available");
+
   // when the icon is clicked, show the info box of information
   $("#menu").click(function(){
-    $("#info").show();
+    $("#info").fadeIn(500);
   });
 
 
   // click the x to close the info box
   $(".close").click(function(){
-    $("#info").hide();
+    $("#info").fadeOut(500);
 
   });
 
@@ -78,6 +81,9 @@ function awakeAsleep() {
   // >= means greater than or equal to --- && means and --- <= means less than or equal to
   if (theHour >= 9 && theHour <= 19){
 
+    // displays text in console to make sure if statement works
+    console.log("2 - Good morning");
+
     // white background
     $("body").css({
       backgroundColor : "cornsilk" // change to white after
@@ -91,14 +97,15 @@ function awakeAsleep() {
   // ELSE, if the time is not 10am-8pm, the site is ASLEEP (black background)
   else {
 
+    // displays text in console to make sure if statement works
+    console.log("2 - Good night");
+
     // black background
     $("body").css({
       backgroundColor : "black"
     });
 
     // how to make non responsive??
-
-
 
   }
 
