@@ -26,16 +26,16 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 
 
-// How often to check the current volume
-const CHECK_INTERVAL = 100;
-
-// An audiocontext is used to work with audio
-var audioContext;
-// We will create an audio meter and put it in here
-var meter;
-// A place to store the output stream of the microphone
-var microphone;
-
+// // How often to check the current volume
+// const CHECK_INTERVAL = 100;
+//
+// // An audiocontext is used to work with audio
+// var audioContext;
+// // We will create an audio meter and put it in here
+// var meter;
+// // A place to store the output stream of the microphone
+// var microphone;
+//
 
 
 
@@ -51,6 +51,7 @@ $(document).ready(function() {
 
   awakeAsleep();
 
+  visitMe();
 
 
 
@@ -58,20 +59,19 @@ $(document).ready(function() {
 
 
 
-
-  // Audio stuff
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    if (navigator.getUserMedia) {     
-      // Note that this time we use {audio: true} to get the microphone,
-      // otherwise it's the same as getting video.
-      navigator.getUserMedia({audio: true}, handleAudio, audioError);
-    }
-
-    // We're going to repeatedly check the current audio volume
-    // in order to update the visibilty of the page content,
-    // so we need an interval
-    setInterval(update,CHECK_INTERVAL);
+  // // Audio stuff
+  //   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+  //
+  //   if (navigator.getUserMedia) {     
+  //     // Note that this time we use {audio: true} to get the microphone,
+  //     // otherwise it's the same as getting video.
+  //     navigator.getUserMedia({audio: true}, handleAudio, audioError);
+  //   }
+  //
+  //   // We're going to repeatedly check the current audio volume
+  //   // in order to update the visibilty of the page content,
+  //   // so we need an interval
+  //   setInterval(update,CHECK_INTERVAL);
 
 
 
@@ -232,6 +232,52 @@ function sadSquare (x, y) {
 // # OF VISITS SAVED TO LOCAL STORAGE
 
 
+function visitMe() {
+
+  var memory;
+
+    // localStorage.clear();
+
+    var now = new Date();
+
+    memory = localStorage.getItem('memory');
+
+    if (memory == undefined) {
+      memory = {
+        lastVisit: now.getTime()
+      }
+    }
+    else {
+      memory = JSON.parse(memory);
+    }
+
+    var nowMillis = now.getTime();
+
+    var timeAway = nowMillis - memory.lastVisit;
+
+    console.log("Time away: ",timeAway);
+
+    var daysAway = timeAway/1000/60/60/24;
+
+    if (daysAway == 0) {
+      console.log("Who are you?");
+    }
+    else if (daysAway < 0.0001) {
+      console.log("Leave me alone! I need some space!");
+    }
+    else if (daysAway > 1) {
+      console.log("Where WERE you?!");
+    }
+    else {
+      console.log("I love you so damn much.");
+    }
+
+    memory.lastVisit = now.getTime();
+    localStorage.setItem('memory',JSON.stringify(memory));
+
+
+
+};
 
 
 
@@ -241,57 +287,57 @@ function sadSquare (x, y) {
 // handleAudio (stream)
 //
 // Called when we have access to the microphone's audio stream
-function handleAudio (stream) {
-  // Create our AudioContext for working with audio...
-  audioContext = new AudioContext();
-
-  // Store the audio stream from the microphone in our microphone variable
-  microphone = audioContext.createMediaStreamSource(stream);
-
-  // Create an audio meter for checking the volume
-  meter = createAudioMeter(audioContext);
-
-  // Connect the meter and the microphone so the meter has access
-  // the microphone stream
-  microphone.connect(meter);
-}
-
-// audioError ()
+// function handleAudio (stream) {
+//   // Create our AudioContext for working with audio...
+//   audioContext = new AudioContext();
 //
-// If something goes wrong, panic!
-
-function audioError(e) {
-  $("body").append(sadSquare(100,100));
-}
-
-// update ()
+//   // Store the audio stream from the microphone in our microphone variable
+//   microphone = audioContext.createMediaStreamSource(stream);
 //
-// Called every CHECK_INTERVAL milliseconds.
-// Checks to make sure the meter exists, and then sets the opacity
-// of our content div to be relative to the current volume.
-function update () {
-  if (meter) {
-    // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
-    // If you look at the value of meter.volume, it's often very, very small
-    // for ambient noise, so we multiple by 10000 to make our webpage more
-    // sensitive to noise
-    //
-    // We subtract that value from 1 because we want the opacity to get LOWER
-    // when the volume gets HIGHER.
-    var newOpacity = 1 - meter.volume*10000;
-    if (newOpacity < 0) {
-      newOpacity = 0;
-    }
-    // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
-    // if we don't want the if statement
-
-    // Now set the opacity
-    $('#quiet').css({
-      opacity: Math.max(0, newOpacity)
-    });
-
-    // TRY THIS: just set newOpacity to be meter.volume instead,
-    // what does this do? How does it change your experience of the page?
-  }
-
-}
+//   // Create an audio meter for checking the volume
+//   meter = createAudioMeter(audioContext);
+//
+//   // Connect the meter and the microphone so the meter has access
+//   // the microphone stream
+//   microphone.connect(meter);
+// }
+//
+// // audioError ()
+// //
+// // If something goes wrong, panic!
+//
+// function audioError(e) {
+//   $("body").append(sadSquare(100,100));
+// }
+//
+// // update ()
+// //
+// // Called every CHECK_INTERVAL milliseconds.
+// // Checks to make sure the meter exists, and then sets the opacity
+// // of our content div to be relative to the current volume.
+// function update () {
+//   if (meter) {
+//     // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
+//     // If you look at the value of meter.volume, it's often very, very small
+//     // for ambient noise, so we multiple by 10000 to make our webpage more
+//     // sensitive to noise
+//     //
+//     // We subtract that value from 1 because we want the opacity to get LOWER
+//     // when the volume gets HIGHER.
+//     var newOpacity = 1 - meter.volume*10000;
+//     if (newOpacity < 0) {
+//       newOpacity = 0;
+//     }
+//     // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
+//     // if we don't want the if statement
+//
+//     // Now set the opacity
+//     $('#quiet').css({
+//       opacity: Math.max(0, newOpacity)
+//     });
+//
+//     // TRY THIS: just set newOpacity to be meter.volume instead,
+//     // what does this do? How does it change your experience of the page?
+//   }
+//
+// }
