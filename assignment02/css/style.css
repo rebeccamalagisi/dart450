@@ -49,15 +49,22 @@ html, body {
 
 }
 
+.close {
+  position: absolute;
+  top:20px;
+  right:20px;
+
+}
+
 /* =============== HAPPY / SAD METER =============== */
 
 #happy {
   position: absolute;
   border: solid 2px red;
   display: inline-block;
-  bottom:20px;
-  right:80px;
-  padding: 10px;
+  bottom:60px;
+  left:20px;
+  padding: 8px;
   font-size: 12px;
 
 
@@ -68,8 +75,8 @@ html, body {
   border: solid 2px red;
   display: inline-block;
   bottom:20px;
-  right:20px;
-  padding: 10px;
+  left:20px;
+  padding: 8px;
   font-size: 12px;
 
 

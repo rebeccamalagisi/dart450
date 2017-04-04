@@ -17,6 +17,7 @@ var date = new Date();
 // date.getHours --> date is the variable above
 // call the var theHour to callback easier later
 var theHour = date.getHours();
+var theDay = date.getDate(); // maybe unnecessary???
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -69,7 +70,7 @@ function careInstructions() {
 
 ///////////////////////////////////////////////////////////////////////////
 
-// AWAKE/ASLEEP function
+// AWAKE/ASLEEP FUNCTION
 
 function awakeAsleep() {
 
@@ -110,5 +111,27 @@ function awakeAsleep() {
   }
 
 
-
 };
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+// HAPPY/SAD FUNCTION
+
+  // if () {
+  //
+  //
+  //
+  //
+  //
+  // }
+
+
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  // # OF VISITS SAVED TO LOCAL STORAGE
