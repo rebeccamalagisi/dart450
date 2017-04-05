@@ -111,11 +111,11 @@ html, body {
 
 #audio {
   position: absolute;
-  background-color: blue;
-  height:500px;
-  width:500px;
-  top:20px;
-  left:20px;
+  background-color: black;
+  height:60px;
+  width:60px;
+  bottom:20px;
+  right:20px;
 
 
 
@@ -123,7 +123,11 @@ html, body {
 
 
 
-
+/*
+#webcam {
+  position: absolute;
+  visibility: hidden;
+}*/
 
 
 
