@@ -12,7 +12,7 @@ Description of this script in the context of the project
 
 ///////////////////////////////////////////////////////////////////////////
 
-// VARIABLES
+// DATE VARIABLES
 
 // retrieve date and time data from computer and store in date variable
 var date = new Date();
@@ -26,16 +26,20 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 
 
-// // How often to check the current volume
-// const CHECK_INTERVAL = 100;
-//
-// // An audiocontext is used to work with audio
-// var audioContext;
-// // We will create an audio meter and put it in here
-// var meter;
-// // A place to store the output stream of the microphone
-// var microphone;
-//
+///////////////////////////////////////////////////////////////////////////
+
+// AUDIO VARIABLES
+
+// How often to check the current volume
+const CHECK_INTERVAL = 100;
+
+// An audiocontext is used to work with audio
+var audioContext;
+// We will create an audio meter and put it in here
+var meter;
+// A place to store the output stream of the microphone
+var microphone;
+
 
 
 
@@ -46,7 +50,7 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 $(document).ready(function() {
 
-  // Make care instructions functional by calling it when the document loads
+  // Make functions work by calling it when the document loads
   careInstructions();
 
   awakeAsleep();
@@ -61,19 +65,19 @@ $(document).ready(function() {
 
 
 
-  // // Audio stuff
-  //   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-  //
-  //   if (navigator.getUserMedia) {     
-  //     // Note that this time we use {audio: true} to get the microphone,
-  //     // otherwise it's the same as getting video.
-  //     navigator.getUserMedia({audio: true}, handleAudio, audioError);
-  //   }
-  //
-  //   // We're going to repeatedly check the current audio volume
-  //   // in order to update the visibilty of the page content,
-  //   // so we need an interval
-  //   setInterval(update,CHECK_INTERVAL);
+  // Audio stuff
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+    if (navigator.getUserMedia) {     
+      // Note that this time we use {audio: true} to get the microphone,
+      // otherwise it's the same as getting video.
+      navigator.getUserMedia({audio: true}, handleAudio, audioError);
+    }
+
+    // We're going to repeatedly check the current audio volume
+    // in order to update the visibilty of the page content,
+    // so we need an interval
+    setInterval(update,CHECK_INTERVAL);
 
 
 
@@ -127,7 +131,7 @@ function awakeAsleep() {
 
   // if the hour is between 10am and 8pm, the site is AWAKE (white background)
   // >= means greater than or equal to --- && means and --- <= means less than or equal to
-  if (theHour >= 9 && theHour <= 19){
+  if (theHour >= 9 && theHour <= 23){
 
     // displays text in console to make sure if statement works
     console.log("2 - Awake");
@@ -155,6 +159,8 @@ function awakeAsleep() {
 
     // how to make non responsive??
 
+
+
   }
 
 
@@ -165,50 +171,97 @@ function awakeAsleep() {
 
 // SQUARE THINGS
 
-function happySquare (x, y) {
-
-  console.log("happy square test");
-
-  var squareOne = $('<div></div>'); 
-
-  squareOne.css({
-    position: 'absolute',
-    width: '20px',
-    height: '20px', 
-    bottom: y + 'px',
-    left: x + 'px', 
-    backgroundColor: 'lime'
-  });
-
-  return squareOne;
-
-
-
-
-};
-
-
-
-function sadSquare (x, y) {
-
-  console.log("sad square test");
-
-  var squareTwo = $('<div></div>'); 
-
-  squareTwo.css({
-    position: 'absolute',
-    width: '20px',
-    height: '20px', 
-    bottom: y + 'px',
-    left: x + 'px', 
-    backgroundColor: 'blue'
-  });
-
-  return squareTwo;
+// function happySquare() {
+//
+//
+//   const TOTAL_CLASSES = 1;
+//
+//
+//   // We want to add divs over time this time...
+//   // So we'll use setInterval, which is like a kind of loop in time
+//   // It happens over and over again, just with a delay between
+//   // executions of its code.
+//
+//
+//   // setInterval(function () {
+//     // And then we'll have our for loop from previously
+//     for (var i = 0; i < TOTAL_CLASSES; i++) {
+//
+//       console.log("happy");
+//       // Create the div
+//       var happy = $('<div class="happy' + i + '"></div>')
+//       // Add the div to the page
+//       return happy;
+//     }
+//   // },INTERVAL);
+//
+//
+//
+//
+// };
+//
+//
+//
+// function sadSquare() {
+//
+//
+//
+//
+//
+// };
 
 
 
-};
+
+
+
+
+
+
+// function happySquare (x) {
+//
+//   console.log("happy square test");
+//
+//   var squareOne = $('<div></div>'); 
+//
+//   squareOne.css({
+//     position: 'absolute',
+//     width: '20px',
+//     height: '20px', 
+//     bottom: '65px',
+//     left: x + 'px', 
+//     backgroundColor: 'lime'
+//   });
+//
+//   return squareOne;
+//
+//
+//
+//
+// };
+//
+//
+//
+// function sadSquare (x) {
+//
+//   console.log("sad square test");
+//
+//   var squareTwo = $('<div></div>'); 
+//
+//   squareTwo.css({
+//     position: 'absolute',
+//     width: '20px',
+//     height: '20px', 
+//     bottom: '25px',
+//     left: x + 'px', 
+//     backgroundColor: 'blue'
+//   });
+//
+//   return squareTwo;
+//
+//
+//
+// };
 
 
 
@@ -275,6 +328,7 @@ function saveLocal() {
     // ELSE IF not much time has passed
     else if (daysAway > 0) {
       console.log("I love you so damn much.");
+      // $("body").append(happySquare());
     }
     // ELSE IF user has been gone for less than 1.5 days
     else if (daysAway < 1.5) {
@@ -322,57 +376,64 @@ function clearLocal(event) {
 // handleAudio (stream)
 //
 // Called when we have access to the microphone's audio stream
-// function handleAudio (stream) {
-//   // Create our AudioContext for working with audio...
-//   audioContext = new AudioContext();
+
+
+
+
+
+
+
+function handleAudio (stream) {
+  // Create our AudioContext for working with audio...
+  audioContext = new AudioContext();
+
+  // Store the audio stream from the microphone in our microphone variable
+  microphone = audioContext.createMediaStreamSource(stream);
+
+  // Create an audio meter for checking the volume
+  meter = createAudioMeter(audioContext);
+
+  // Connect the meter and the microphone so the meter has access
+  // the microphone stream
+  microphone.connect(meter);
+}
+
+// audioError ()
 //
-//   // Store the audio stream from the microphone in our microphone variable
-//   microphone = audioContext.createMediaStreamSource(stream);
+// If something goes wrong, panic!
+
+function audioError(e) {
+  // $("body").append(sadSquare(100,100));
+}
+
+// update ()
 //
-//   // Create an audio meter for checking the volume
-//   meter = createAudioMeter(audioContext);
-//
-//   // Connect the meter and the microphone so the meter has access
-//   // the microphone stream
-//   microphone.connect(meter);
-// }
-//
-// // audioError ()
-// //
-// // If something goes wrong, panic!
-//
-// function audioError(e) {
-//   $("body").append(sadSquare(100,100));
-// }
-//
-// // update ()
-// //
-// // Called every CHECK_INTERVAL milliseconds.
-// // Checks to make sure the meter exists, and then sets the opacity
-// // of our content div to be relative to the current volume.
-// function update () {
-//   if (meter) {
-//     // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
-//     // If you look at the value of meter.volume, it's often very, very small
-//     // for ambient noise, so we multiple by 10000 to make our webpage more
-//     // sensitive to noise
-//     //
-//     // We subtract that value from 1 because we want the opacity to get LOWER
-//     // when the volume gets HIGHER.
-//     var newOpacity = 1 - meter.volume*10000;
-//     if (newOpacity < 0) {
-//       newOpacity = 0;
-//     }
-//     // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
-//     // if we don't want the if statement
-//
-//     // Now set the opacity
-//     $('#quiet').css({
-//       opacity: Math.max(0, newOpacity)
-//     });
-//
-//     // TRY THIS: just set newOpacity to be meter.volume instead,
-//     // what does this do? How does it change your experience of the page?
-//   }
-//
-// }
+// Called every CHECK_INTERVAL milliseconds.
+// Checks to make sure the meter exists, and then sets the opacity
+// of our content div to be relative to the current volume.
+function update () {
+  if (meter) {
+    // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
+    // If you look at the value of meter.volume, it's often very, very small
+    // for ambient noise, so we multiple by 10000 to make our webpage more
+    // sensitive to noise
+    //
+    // We subtract that value from 1 because we want the opacity to get LOWER
+    // when the volume gets HIGHER.
+    var newOpacity = 1 - meter.volume*10;
+    if (newOpacity < 0) {
+      newOpacity = 0;
+    }
+    // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
+    // if we don't want the if statement
+
+    // Now set the opacity
+    $('#audio').css({
+      opacity: Math.max(0, newOpacity)
+    });
+
+    // TRY THIS: just set newOpacity to be meter.volume instead,
+    // what does this do? How does it change your experience of the page?
+  }
+
+}
