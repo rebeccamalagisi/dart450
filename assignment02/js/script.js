@@ -26,19 +26,30 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 
 
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
-// AUDIO VARIABLES
+var audioContext = null;
+var meter = null;
+var canvasContext = null;
+var WIDTH=500;
+var HEIGHT=50;
+var rafID = null;
 
-// How often to check the current volume
-const CHECK_INTERVAL = 100;
 
-// An audiocontext is used to work with audio
-var audioContext;
-// We will create an audio meter and put it in here
-var meter;
-// A place to store the output stream of the microphone
-var microphone;
+// // AUDIO VARIABLES
+//
+// // How often to check the current volume
+// const CHECK_INTERVAL = 100;
+//
+// // An audiocontext is used to work with audio
+// var audioContext;
+// // We will create an audio meter and put it in here
+// var meter;
+// // A place to store the output stream of the microphone
+// var microphone;
 
 
 
@@ -99,21 +110,21 @@ $(document).ready(function() {
 
 
 
-  // Audio stuff
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    if (navigator.getUserMedia) {     
-      // Note that this time we use {audio: true} to get the microphone,
-      // otherwise it's the same as getting video.
-      navigator.getUserMedia({audio: true}, handleAudio, audioError);
-
-      console.log("AUDIO WORKING");
-    }
-
-    // We're going to repeatedly check the current audio volume
-    // in order to update the visibilty of the page content,
-    // so we need an interval
-    setInterval(update,CHECK_INTERVAL);
+  // // Audio stuff
+  //   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+  //
+  //   if (navigator.getUserMedia) {     
+  //     // Note that this time we use {audio: true} to get the microphone,
+  //     // otherwise it's the same as getting video.
+  //     navigator.getUserMedia({audio: true}, handleAudio, audioError);
+  //
+  //     console.log("AUDIO WORKING");
+  //   }
+  //
+  //   // We're going to repeatedly check the current audio volume
+  //   // in order to update the visibilty of the page content,
+  //   // so we need an interval
+  //   setInterval(update,CHECK_INTERVAL);
 
 
     // // video implementation
@@ -123,6 +134,40 @@ $(document).ready(function() {
     //
     // }
 
+
+    // grab our canvas
+	canvasContext = document.getElementById( "meter" ).getContext("2d");
+
+    // monkeypatch Web Audio
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+    // grab an audio context
+    audioContext = new AudioContext();
+
+    // Attempt to get audio input
+    try {
+        // monkeypatch getUserMedia
+        navigator.getUserMedia =
+        	navigator.getUserMedia ||
+        	navigator.webkitGetUserMedia ||
+        	navigator.mozGetUserMedia;
+
+        // ask for an audio input
+        navigator.getUserMedia(
+        {
+            "audio": {
+                "mandatory": {
+                    "googEchoCancellation": "false",
+                    "googAutoGainControl": "false",
+                    "googNoiseSuppression": "false",
+                    "googHighpassFilter": "false"
+                },
+                "optional": []
+            },
+        }, gotStream, didntGetStream);
+    } catch (e) {
+        alert('getUserMedia threw exception :' + e);
+    }
 
 
 
@@ -434,60 +479,60 @@ function clearLocal(event) {
 
 
 
-function handleAudio (stream) {
-  // Create our AudioContext for working with audio...
-  audioContext = new AudioContext();
-
-  // Store the audio stream from the microphone in our microphone variable
-  microphone = audioContext.createMediaStreamSource(stream);
-
-  // Create an audio meter for checking the volume
-  meter = createAudioMeter(audioContext);
-
-  // Connect the meter and the microphone so the meter has access
-  // the microphone stream
-  microphone.connect(meter);
-}
-
-// audioError ()
+// function handleAudio (stream) {
+//   // Create our AudioContext for working with audio...
+//   audioContext = new AudioContext();
 //
-// If something goes wrong, panic!
-
-function audioError(e) {
-  // $("body").append(sadSquare(100,100));
-}
-
-// update ()
+//   // Store the audio stream from the microphone in our microphone variable
+//   microphone = audioContext.createMediaStreamSource(stream);
 //
-// Called every CHECK_INTERVAL milliseconds.
-// Checks to make sure the meter exists, and then sets the opacity
-// of our content div to be relative to the current volume.
-function update () {
-  if (meter) {
-    // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
-    // If you look at the value of meter.volume, it's often very, very small
-    // for ambient noise, so we multiple by 10000 to make our webpage more
-    // sensitive to noise
-    //
-    // We subtract that value from 1 because we want the opacity to get LOWER
-    // when the volume gets HIGHER.
-    var newOpacity = meter.volume*50 - 1;
-    if (newOpacity < 0) {
-      newOpacity = 0;
-    }
-    // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
-    // if we don't want the if statement
-
-    // Now set the opacity
-    $('#audio').css({
-      opacity: Math.max(0, newOpacity)
-    });
-
-    // TRY THIS: just set newOpacity to be meter.volume instead,
-    // what does this do? How does it change your experience of the page?
-  }
-
-}
+//   // Create an audio meter for checking the volume
+//   meter = createAudioMeter(audioContext);
+//
+//   // Connect the meter and the microphone so the meter has access
+//   // the microphone stream
+//   microphone.connect(meter);
+// }
+//
+// // audioError ()
+// //
+// // If something goes wrong, panic!
+//
+// function audioError(e) {
+//   // $("body").append(sadSquare(100,100));
+// }
+//
+// // update ()
+// //
+// // Called every CHECK_INTERVAL milliseconds.
+// // Checks to make sure the meter exists, and then sets the opacity
+// // of our content div to be relative to the current volume.
+// function update () {
+//   if (meter) {
+//     // meter.volume gives us a number between 0 (silence) and 1 (loudest possible)
+//     // If you look at the value of meter.volume, it's often very, very small
+//     // for ambient noise, so we multiple by 10000 to make our webpage more
+//     // sensitive to noise
+//     //
+//     // We subtract that value from 1 because we want the opacity to get LOWER
+//     // when the volume gets HIGHER.
+//     var newOpacity = meter.volume*50 - 1;
+//     if (newOpacity < 0) {
+//       newOpacity = 0;
+//     }
+//     // Could also use: var newOpacity = Math.max(0, 1 - meter.volume*10000)
+//     // if we don't want the if statement
+//
+//     // Now set the opacity
+//     $('#audio').css({
+//       opacity: Math.max(0, newOpacity)
+//     });
+//
+//     // TRY THIS: just set newOpacity to be meter.volume instead,
+//     // what does this do? How does it change your experience of the page?
+//   }
+//
+// }
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -614,3 +659,44 @@ function update () {
 //   var randomIndex = Math.floor(Math.random() * array.length);
 //   return array[randomIndex];
 // }
+
+
+///////////////////////////////////////////////////////////////////////////
+
+// AUDIO
+
+
+function didntGetStream() {
+    alert('Stream generation failed.');
+}
+
+var mediaStreamSource = null;
+
+function gotStream(stream) {
+    // Create an AudioNode from the stream.
+    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+
+    // Create a new volume meter and connect it.
+    meter = createAudioMeter(audioContext);
+    mediaStreamSource.connect(meter);
+
+    // kick off the visual updating
+    drawLoop();
+}
+
+function drawLoop( time ) {
+    // clear the background
+    canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+
+    // check if we're currently clipping
+    if (meter.checkClipping())
+        canvasContext.fillStyle = "red";
+    else
+        canvasContext.fillStyle = "green";
+
+    // draw a bar based on the current volume
+    canvasContext.fillRect(0, 0, meter.volume*WIDTH*2, HEIGHT);
+
+    // set up the next visual callback
+    rafID = window.requestAnimationFrame( drawLoop );
+}
