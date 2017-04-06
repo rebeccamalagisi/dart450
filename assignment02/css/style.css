@@ -121,6 +121,18 @@ html, body {
 
 }
 
+#meter {
+  position: absolute;
+  background-color: green;
+  height:60px;
+  width:60px;
+  bottom:20px;
+  right:200px;
+
+
+
+}
+
 
 
 /*
