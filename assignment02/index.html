@@ -45,10 +45,6 @@ Description of project and purpose of HTML
   <!-- We include the tracking data -->
   <script src="js/data/face-min.js"></script>
 
-  <script src="js/audio.js"></script>
-
-
-
   <!-- We include our own script file(s) -->
   <script src="js/script.js" content="text/javascript"></script>
 
@@ -94,7 +90,10 @@ Description of project and purpose of HTML
 
   </div>
 
-  <video id="webcam" width="320" height="240" preload autoplay loop muted></video>
+  <div class="container">
+      <video id="video" width="320" height="240" preload autoplay loop muted></video>
+      <canvas id="canvas" width="320" height="240"></canvas>
+  </div>
 
 </body>
 
