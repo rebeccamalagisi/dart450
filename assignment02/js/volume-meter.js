@@ -47,7 +47,7 @@ function createAudioMeter(audioContext,clipLevel,averaging,clipLag) {
 
 ////////////////////////////////////
 	// change clipping level???? = lower clipping range (louder noises as red)
-	processor.clipLevel = clipLevel || 0.5;
+	processor.clipLevel = clipLevel || 0.3;
 	processor.averaging = averaging || 0.95;
 	processor.clipLag = clipLag || 500;
 
