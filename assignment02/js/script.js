@@ -53,7 +53,6 @@ var noStrings = [
   "Come back.",
   "I'm so lonely.",
   "Why do you keep leaving me?",
-  "Don't be shy.",
   "I wish you'd show me your face.",
   "Please don't hide from me."
 ];
@@ -64,9 +63,7 @@ var yesStrings = [
   "I'm glad you're back.",
   "I missed you, pal.",
   "Stay with me for a while.",
-  "You look so serious.",
   "You have nice eyes.",
-  "You're so intriguing to watch.",
   "I wish I knew more about you."
 ];
 
@@ -76,93 +73,44 @@ var yesStrings = [
 
 // DOCUMENT.READY = SHIT THAT IS READY WHEN THE PAGE LOADS
 
+
 $(document).ready(function() {
 
   // Make functions work by calling it when the document loads
   careInstructions();
 
-  awakeAsleep();
-
-  saveLocal();
-
-
   // Calling the clearLocal storage function with keypress = reseting memory
   $("body").keypress(clearLocal);
 
 
+  // Creating a variable for the isAwake() function
+  var awake = isAwake();
+  // IF use that variable/function
+  if (awake) {
+    // Set the background to white
+    $('body').css('background-color','cornsilk');
+    // Video and audio functions work
+    setupVideo();
+    setupAudio();
+    // Time saving to localStorage works
+    saveLocal();
 
 
+    console.log("I'm awake");
+  }
+  // ELSE the function is not called (if it's not between the specific times)
+  else {
+    // Set background to black
+    $('body').css('background-color','black');
 
-  // Audio stuff
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    if (navigator.getUserMedia) {     
-      // Note that this time we use {audio: true} to get the microphone,
-      // otherwise it's the same as getting video.
-      navigator.getUserMedia({audio: true}, handleAudio, audioError);
-
-      console.log("AUDIO WORKING");
-    }
-
-    // We're going to repeatedly check the current audio volume
-    // in order to update the visibilty of the page content,
-    // so we need an interval
-    setInterval(update,CHECK_INTERVAL);
+    console.log("I'm asleep");
+  }
 
 
-    // Video implementation
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-    if (navigator.getUserMedia) {      
-      navigator.getUserMedia({video: true}, handleVideo, videoError);
-
-
-    }
-
-
-  //   // grab our canvas
-	// canvasContext = document.getElementById( "meter" ).getContext("2d");
-  //
-  //   // monkeypatch Web Audio
-  //   window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  //
-  //   // grab an audio context
-  //   audioContext = new AudioContext();
-  //
-  //   // Attempt to get audio input
-  //   try {
-  //       // monkeypatch getUserMedia
-  //       navigator.getUserMedia =
-  //       	navigator.getUserMedia ||
-  //       	navigator.webkitGetUserMedia ||
-  //       	navigator.mozGetUserMedia;
-  //
-  //       // ask for an audio input
-  //       navigator.getUserMedia(
-  //       {
-  //           "audio": {
-  //               "mandatory": {
-  //                   "googEchoCancellation": "false",
-  //                   "googAutoGainControl": "false",
-  //                   "googNoiseSuppression": "false",
-  //                   "googHighpassFilter": "false"
-  //               },
-  //               "optional": []
-  //           },
-  //       }, gotStream, didntGetStream);
-  //   } catch (e) {
-  //       alert('getUserMedia threw exception :' + e);
-  //   }
 
 
 
 });
-
-
-
-
-
-
 
 
 
@@ -190,6 +138,67 @@ function careInstructions() {
   });
 
 };
+
+
+///////////////////////////////////////////////////////////////////////////
+// IS AWAKE FUNCTION
+
+
+function isAwake () {
+  // theHour is var at the beginning and includes date.getHours()
+  // getHours will retrieve the hour from the computer (0-23 hours)
+  // date.getHours --> date is the variable at the beginning of the doc to retrieve Date() data from the computer
+
+  // if the hour is between 10am and 8pm, the site is AWAKE (white background)
+  // >= means greater than or equal to --- && means and --- <= means less than or equal to
+  if (theHour >= 11 && theHour <= 23){
+    return true;
+  }
+
+  // ELSE, if the time is not 10am-8pm, the site is ASLEEP (black background)
+  else {
+    return false;
+  }
+}
+
+
+function setupAudio () {
+  // Audio stuff
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+    if (navigator.getUserMedia) {
+      // Note that this time we use {audio: true} to get the microphone,
+      // otherwise it's the same as getting video.
+      navigator.getUserMedia({audio: true}, handleAudio, audioError);
+
+      console.log("AUDIO WORKING");
+    }
+
+    // We're going to repeatedly check the current audio volume
+    // in order to update the visibilty of the page content,
+    // so we need an interval
+    setInterval(update,CHECK_INTERVAL);
+}
+
+
+function setupVideo () {
+  // Video implementation
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia({video: true}, handleVideo, videoError);
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -373,7 +382,8 @@ function saveLocal() {
     // If user has not visited before, new time NOW will be LASTVISIT
     if (memory == undefined) {
       memory = {
-        lastVisit: now.getTime()
+        lastVisit: now.getTime(),
+        numVisits: 0
       }
     }
     // Else, get find the data in memory
@@ -381,6 +391,9 @@ function saveLocal() {
       memory = JSON.parse(memory);
     }
 
+    memory.numVisits = memory.numVisits + 1;
+
+    console.log("Visit #" + memory.numVisits);
 
 
     // getTime() retrieves time in milliseconds
