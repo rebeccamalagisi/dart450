@@ -64,6 +64,19 @@ var yesStrings = [
 
 var faceDetected = false;
 
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+const NUMBER_OF_CIRCLES = 17;
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 
 // DOCUMENT.READY = SHIT THAT IS READY WHEN THE PAGE LOADS
@@ -86,7 +99,7 @@ $(document).ready(function() {
     console.log("I'm awake.");
 
     // Set the background to white
-    $('body').css('background-color','cornsilk');
+    $('body').css('background-color','white');
     // Video and audio functions work
     setupVideo();
     setupAudio();
@@ -95,8 +108,17 @@ $(document).ready(function() {
 
     // IF the visit number is over 30, add the class to make the background change color
     // && memory.lastVisit < 10000 or && memory.lastVisit > 1000000
+    // var now = new Date();
+    // var nowMillis = now.getTime();
+    // var timeAway = nowMillis - memory.lastVisit;
+    // && timeAway < 10000
+
     if (memory.numVisits >= 30) {
       $('body').addClass('visit');
+
+      // soSoHappy();
+
+
 
 
 
@@ -529,10 +551,98 @@ function clearLocal(event) {
 
 
 
+///////////////////////////////////////////////////////////////////////////
+
+
+// function soSoHappy() {
+//
+//
+//
+//
+// }
+
+
+
+function soSoHappy() {
+
+  // Generating the circles from the generateCircles function below
+
+  // Create a FOR loop to create a bunch of circles up to the number listed is the constant
+  for (var i = 0; i < NUMBER_OF_CIRCLES; i++) {
+
+    // Math.random() returns a random floating point number between 0 and 1
+    // $(document).width() and $(document).height() return the width and
+    // height of the current document respectively
+    //
+    // So if we multiply the width by a random number between 0 and 1 we
+    // get a random position from the left to the right of the page
+    var x = Math.random() * $(document).width();
+
+    // And if we multiply the height by a random number between 0 and 1
+    // we get a random position from the top to the bottom of the page
+    var y = Math.random() * $(document).height();
+
+    // And then add it to the page
+    $('body').append(generateCircles(x,y));
+
+  }
+
+  // $('.circle').hover(function){
+  //   $(this).animate({
+  //     'height': '+=20px',
+  //     'width': '+=20px',
+  //
+  //   });
+  //
+  //
+  // };
+
+
+}
 
 
 
 
+
+
+function generateCircles(x, y) {
+
+  // Making the actual divs
+  var circleDiv = $('<div class="circle"></div>');
+
+  // Variables that will create the colors for the circles
+
+  var bgColor = ['cyan', 'green', 'yellow', 'orange', 'blue', 'purple', 'pink', 'magenta']
+  var randomColor = bgColor[Math.floor(Math.random() * bgColor.length)];
+
+  // Styling the circle divs using css
+  circleDiv.css({
+    position: 'absolute',
+    zIndex: '0',
+    width: '80px',
+    height: '80px', 
+    top: y + 'px',
+    left: x + 'px', 
+    borderRadius: '50%',
+    opacity: '0.6',
+    backgroundColor: randomColor
+
+  });
+
+  // Give me a div but don't show it on the webpage until I append it in the document.ready
+  return circleDiv;
+
+}
+
+
+
+//
+// // Calculate random numbers
+// function randomIntegerInRange(min,max) {
+//
+//   return Math.floor(Math.random() * (max - min)) + min;
+// }
+//
 
 
 
