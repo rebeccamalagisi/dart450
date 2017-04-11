@@ -91,8 +91,6 @@ $(document).ready(function() {
     saveLocal();
 
 
-
-
     // if (numVisits >= 2) {
     //   $('body').css('background-color','blue');
     //
