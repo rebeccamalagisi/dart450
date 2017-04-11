@@ -27,10 +27,14 @@ html, body {
 /* =============== CARE INSTRUCTIONS =============== */
 
 #info {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 20px;
+  line-height: 28px;
   position:absolute;
-  border: solid 2px red;
+  background-color: white;
+  /*border: solid 2px red;*/
   display: inline-block;
-  padding: 60px;
+  padding: 32px 60px;
   text-align: center;
   top:50%;
   left:50%;
@@ -40,14 +44,18 @@ html, body {
 }
 
 #menu {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
   position: absolute;
   border:none;
   /*border: solid 2px red;*/
   display: inline-block;
-  padding: 12px 16px;
+  padding: 12px 20px;
   top:20px;
   right:20px;
   z-index: 10;
+  background-color: transparent;
 
 }
 
@@ -56,10 +64,65 @@ html, body {
   top:20px;
   right:20px;
 
+  font-family: 'Helvetica', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  border:none;
+  /*border: solid 2px red;*/
+  display: inline-block;
+  /*padding: 12px 20px;*/
+  background-color: transparent;
+  color: red;
+
 }
 
-/* =============== HAPPY / SAD METER =============== */
+/* =============== AUDIO =============== */
 
+
+#audioDiv {
+  position: absolute;
+  background-color: black;
+  height:32px;
+  width:32px;
+  top:175px;
+  left:20px;
+
+
+
+}
+
+
+video, canvas {
+  position: absolute;
+  /*top: 0;*/
+  top: 20px;
+  /*left: 0;*/
+  left: 20px;
+  margin: auto;
+  z-index: -1; /* display video in back of lines */
+}
+
+
+/* =============== VISIT CLASS =============== */
+
+.thirty{
+  animation-name: thirty;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+
+}
+
+@keyframes thirty{
+  0% {background-color: #cfffaf;}
+  25% {background-color: #afebff;}
+  50% {background-color: #b8afff;}
+  75% {background-color: #afebff;}
+  100% {background-color: #cfffaf;}
+}
+
+
+/* =============== HAPPY / SAD METER =============== */
+/*
 #happy {
   position: absolute;
   border: solid 2px red;
@@ -105,34 +168,9 @@ html, body {
   bottom:25px;
   float: left;
 
-}
+}*/
 
 
-/* =============== AUDIO =============== */
-
-
-#audioDiv {
-  position: absolute;
-  background-color: black;
-  height:60px;
-  width:60px;
-  top:20px;
-  left:360px;
-
-
-
-}
-
-
-video, canvas {
-  position: absolute;
-  /*top: 0;*/
-  top: 20px;
-  /*left: 0;*/
-  left: 20px;
-  margin: auto;
-  z-index: -1; /* display video in back of lines */
-}
 
 
 /*

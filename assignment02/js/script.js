@@ -24,7 +24,9 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 
 
-// var numVisits = 0
+// Universal variable for memory, will be used in saveLocal function and document.ready
+var memory;
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -56,10 +58,11 @@ var yesStrings = [
   "I missed you, pal.",
   "Stay with me for a while.",
   "You have nice eyes.",
+  "Seeing your face brightens my day.",
   "I wish I knew more about you."
 ];
 
-
+var faceDetected = false;
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -90,11 +93,14 @@ $(document).ready(function() {
     // Time saving to localStorage works
     saveLocal();
 
+    // IF the visit number is over 30, add the class to make the background change color
+    // && memory.lastVisit < 10000
+    if (memory.numVisits >= 30) {
+      $('body').addClass('thirty');
 
-    // if (numVisits >= 2) {
-    //   $('body').css('background-color','blue');
-    //
-    // }
+      
+
+    }
   }
   // ELSE the function is not called (if it's not between the specific times)
   else {
@@ -150,7 +156,7 @@ function isAwake () {
 
   // if the hour is between 10am and 8pm, the site is AWAKE (white background)
   // >= means greater than or equal to --- && means and --- <= means less than or equal to
-  if (theHour >= 11 && theHour <= 23){
+  if (theHour >= 9 && theHour <= 23){
     return true;
   }
 
@@ -245,6 +251,8 @@ function drawLoop( time ) {
 				backgroundColor: "red"
 
 			});
+
+      console.log("You're being too loud...");
 
 		}
         //canvasContext.fillStyle = "red";
@@ -393,15 +401,17 @@ function checkCam () {
 // Called every frame of video that detection is running
 function handleTrackingEvent (event) {
   // Check if anything was tracked (a face)
-  if (event.data.length === 0) {
+  if (event.data.length === 0 && faceDetected == true) {
     // No faces were detected in this frame.
     console.log(getRandomString(noStrings))
+    faceDetected = false;
     // console.log(":(");
 
   }
-  else {
+  else if (event.data.length > 0 && faceDetected == false) {
     // Face is detected
     console.log(getRandomString(yesStrings))
+    faceDetected = true;
     // console.log(":)");
 
     // Reset the time since we saw a face to 0
@@ -423,6 +433,98 @@ function getRandomString(array) {
 
 
 
+///////////////////////////////////////////////////////////////////////////
+
+// TIME OF LAST VISIT SAVED TO LOCAL STORAGE
+
+
+
+function saveLocal() {
+
+    memory;
+
+    // localStorage.clear();
+
+    // retrieve date and time data from computer and store in now variable
+    var now = new Date();
+
+    // Memory var set to get the localStorage
+    memory = localStorage.getItem('memory');
+
+    // If user has not visited before, new time NOW will be LASTVISIT
+    if (memory == undefined) {
+      memory = {
+        lastVisit: now.getTime(),
+        numVisits: 0
+      }
+    }
+    // Else, get find the data in memory
+    else {
+      memory = JSON.parse(memory);
+    }
+
+    memory.numVisits = memory.numVisits + 1;
+
+    console.log("Visit #" + memory.numVisits);
+
+
+    // getTime() retrieves time in milliseconds
+    var nowMillis = now.getTime();
+    // Calculate time since last visit as timeAway var
+    var timeAway = nowMillis - memory.lastVisit;
+    // Print this in the console
+    console.log("Time away: ",timeAway);
+
+    // Calculate days as milliseconds divided by 1000 (milliseconds/second) divided by 60 (seconds/minute) divided by 60 (minutes/hour) divided by 24 (hours/day)
+    var daysAway = timeAway/1000/60/60/24;
+
+    // IF there hasn't been a visit (no previous memory/timeAway)
+    if (daysAway == 0) {
+      console.log("-");
+    }
+    // ELSE IF not much time has passed
+    else if (daysAway > 0) {
+      console.log("Thank you for visiting me again, friend.");
+      // $("body").append(happySquare());
+    }
+    // ELSE IF user has been gone for less than 1.5 days
+    else if (daysAway < 1.5) {
+      console.log("I'm so happy you're back!");
+    }
+    // ELSE user has been gone for over 1.5 days
+    else {
+      console.log("Where WERE you?!");
+    }
+
+
+    // each visit, replace the memory (lastVisit) as current time
+    memory.lastVisit = now.getTime();
+    localStorage.setItem('memory',JSON.stringify(memory));
+
+
+
+};
+
+
+///////////////////////////////////////////////////////////////////////////
+
+// CLEAR LOCAL STORAGE
+
+function clearLocal(event) {
+
+  // If the event number 32 aka space bar is keypress
+  if (event.which == 32) {
+
+    // Tell the console that it is reseting
+    console.log("RESET");
+
+    // And erase the memory
+    localStorage.clear();
+
+  }
+
+
+};
 
 
 
@@ -535,229 +637,3 @@ function getRandomString(array) {
   //
   //
   // }
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////
-
-// TIME OF LAST VISIT SAVED TO LOCAL STORAGE
-
-
-
-function saveLocal() {
-
-    var memory;
-
-    // localStorage.clear();
-
-    // retrieve date and time data from computer and store in now variable
-    var now = new Date();
-
-    // Memory var set to get the localStorage
-    memory = localStorage.getItem('memory');
-
-    // If user has not visited before, new time NOW will be LASTVISIT
-    if (memory == undefined) {
-      memory = {
-        lastVisit: now.getTime(),
-        numVisits: 0
-      }
-    }
-    // Else, get find the data in memory
-    else {
-      memory = JSON.parse(memory);
-    }
-
-    memory.numVisits = memory.numVisits + 1;
-
-    console.log("Visit #" + memory.numVisits);
-
-
-    // getTime() retrieves time in milliseconds
-    var nowMillis = now.getTime();
-    // Calculate time since last visit as timeAway var
-    var timeAway = nowMillis - memory.lastVisit;
-    // Print this in the console
-    console.log("Time away: ",timeAway);
-
-    // Calculate days as milliseconds divided by 1000 (milliseconds/second) divided by 60 (seconds/minute) divided by 60 (minutes/hour) divided by 24 (hours/day)
-    var daysAway = timeAway/1000/60/60/24;
-
-    // IF there hasn't been a visit (no previous memory/timeAway)
-    if (daysAway == 0) {
-      console.log("-");
-    }
-    // ELSE IF not much time has passed
-    else if (daysAway > 0) {
-      console.log("Thank you for visiting me, friend.");
-      // $("body").append(happySquare());
-    }
-    // ELSE IF user has been gone for less than 1.5 days
-    else if (daysAway < 1.5) {
-      console.log("I'm so happy you're back!");
-    }
-    // ELSE user has been gone for over 1.5 days
-    else {
-      console.log("Where WERE you?!");
-    }
-
-
-    // each visit, replace the memory (lastVisit) as current time
-    memory.lastVisit = now.getTime();
-    localStorage.setItem('memory',JSON.stringify(memory));
-
-
-
-};
-
-
-///////////////////////////////////////////////////////////////////////////
-
-// CLEAR LOCAL STORAGE
-
-function clearLocal(event) {
-
-  // If the event number 32 aka space bar is keypress
-  if (event.which == 32) {
-
-    // Tell the console that it is reseting
-    console.log("RESET");
-
-    // And erase the memory
-    localStorage.clear();
-
-  }
-
-
-};
-
-
-
-///////////////////////////////////////////////////////////////////////////
-
-
-// // handleVideo (stream)
-// //
-// // When getUserMedia gets hold of the user's webcam, it calls this function
-// // with the argument "stream" which is the stream of the webcam data
-// function handleVideo(stream) {
-//   // First get the URL of the stream
-//   var streamURL = window.URL.createObjectURL(stream);
-//   // Now hold of the element on the page that can contain the video
-//   // (the video element with id 'webcam') and set its src attribute
-//   // to the URL we created for the stream...
-//   $('#webcam').attr({
-//     src: streamURL
-//   });
-//   // And now that the webcam is available, we can start actually tracking
-//   startTracking();
-//
-//
-// }
-//
-// // videoError (e)
-// //
-// // If there's a problem with getting the webcam, this will get called.
-// // For now it just sets the background color to red to show something
-// // went wrong. Not very sophisticated.
-// function videoError(e) {
-//   $('body').css({
-//     'background-color': 'red'
-//   })
-// }
-//
-// // startTracking()
-// //
-// // Called when webcam is available. Sets up the face tracking.
-// function startTracking() {
-//
-//   // Make a face tracker...
-//   var faceTracker = new tracking.ObjectTracker(['face']);
-//
-//   // Set up the function to call each frame while tracking
-//   faceTracker.on('track', handleTrackingEvent);
-//
-//   // Start tracking
-//   tracking.track('#webcam', faceTracker);
-//
-//
-//
-//   // Also start an interval function that will check if the page
-//   // should become sad
-//   setInterval(checkSad,INTERVAL);
-//
-//
-// }
-//
-// // updateFeelings ()
-// //
-// // Called every INTERVAL - updates how the page is feeling based on
-// // when it last saw our face...
-// function checkSad () {
-//   // Update our variable tracking how long it's been since we saw a face...
-//   timeSinceFace += 100;
-//   // Note this is set back to 0 every frame that the tracker detects a face.
-//
-//   // Check whether it's been too long since we saw a face
-//   // AND the happy face is still full opacity (i.e. not animating away)
-//   if (timeSinceFace > MAX_TIME_SINCE_FACE && $('#yes').css('opacity') == 1) {
-//     // If so, animate in the sad face and animate out the happy face
-//     $('#no').animate({
-//       opacity: 1
-//     },ANIMATION_DURATION);
-//     $('#yes').animate({
-//       opacity: 0
-//     },ANIMATION_DURATION);
-//     // Say a random string from our sad lines
-//     $('#no').text(getRandomString(noStrings));
-//   }
-//
-//
-// }
-//
-// // handleTrackingEvent
-// //
-// // Called every frame of video that detection is running
-// function handleTrackingEvent (event) {
-//   // Check if anything was tracked (a face)
-//   if (event.data.length === 0) {
-//     // No faces were detected in this frame.
-//   }
-//   else {
-//     // We found a face!
-//     // Reset the time since we saw a face to 0
-//     timeSinceFace = 0;
-//     // If the happy face has opacity 0, we need to animate it in
-//     // and animate out the sad face
-//     if ($('#yes').css('opacity') == 0) {
-//       $('#no').animate({
-//         opacity: 0
-//       },ANIMATION_DURATION);
-//       $('#yes').animate({
-//         opacity: 1,
-//       },ANIMATION_DURATION);
-//       // Speak a happy line
-//       $('#yes').text(getRandomString(yesStrings));
-//     }
-//   }
-//
-//
-// }
-//
-//
-//
-//
-//
-//
-//
-// // getRandomString (array)
-// //
-// // A helper function that just returns a random string from the provided
-// // array. This is a classic way to select a random element from an array.
-// function getRandomString(array) {
-//   var randomIndex = Math.floor(Math.random() * array.length);
-//   return array[randomIndex];
-// }
