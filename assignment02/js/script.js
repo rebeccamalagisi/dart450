@@ -24,7 +24,7 @@ var theDay = date.getDate(); // maybe unnecessary???
 
 
 
-
+// var numVisits = 0
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -79,6 +79,9 @@ $(document).ready(function() {
   var awake = isAwake();
   // IF use that variable/function
   if (awake) {
+
+    console.log("I'm awake.");
+
     // Set the background to white
     $('body').css('background-color','cornsilk');
     // Video and audio functions work
@@ -88,14 +91,19 @@ $(document).ready(function() {
     saveLocal();
 
 
-    console.log("I'm awake");
+
+
+    // if (numVisits >= 2) {
+    //   $('body').css('background-color','blue');
+    //
+    // }
   }
   // ELSE the function is not called (if it's not between the specific times)
   else {
     // Set background to black
     $('body').css('background-color','black');
 
-    console.log("I'm asleep");
+    console.log("Goodnight.");
   }
 
 
@@ -115,7 +123,7 @@ $(document).ready(function() {
 function careInstructions() {
 
   // displays text in console to make sure function works
-  console.log("1 - Care instructions available");
+  console.log("Care instructions available.");
 
   // when the icon is clicked, show the info box of information
   $("#menu").click(function(){
@@ -340,6 +348,8 @@ function handleVideo(stream) {
 // For now it just sets the background color to red to show something
 // went wrong. Not very sophisticated.
 function videoError(e) {
+  console.log("I can't see you...");
+
   $('body').css({
     'background-color': 'red'
   })
@@ -378,15 +388,6 @@ function checkCam () {
   // Update our variable tracking how long it's been since we saw a face...
   timeSinceFace += 100;
   // Note this is set back to 0 every frame that the tracker detects a face.
-
-  // // Check whether it's been too long since we saw a face
-  // if (timeSinceFace > MAX_TIME_SINCE_FACE) {
-  //   console.log('show webcam')
-  //   // If so, show the webcamfeed
-  //   // $('#webcam').css({
-  //   //   visibility: 'visible'
-  //   // });
-  // }
 }
 
 // handleTrackingEvent
@@ -395,22 +396,31 @@ function checkCam () {
 function handleTrackingEvent (event) {
   // Check if anything was tracked (a face)
   if (event.data.length === 0) {
-    //console.log(getRandomString(noStrings))
     // No faces were detected in this frame.
+    console.log(getRandomString(noStrings))
+    // console.log(":(");
+
   }
   else {
-    //console.log(getRandomString(yesStrings))
-    // We found a face!
+    // Face is detected
+    console.log(getRandomString(yesStrings))
+    // console.log(":)");
+
     // Reset the time since we saw a face to 0
     timeSinceFace = 0;
-    //hide the webcam feed
-    // $('#webcam').css({
-    //   visibility: 'hidden'
-    // });
+
   }
 }
 
 
+// getRandomString (array)
+//
+// A helper function that just returns a random string from the provided
+// array. This is a classic way to select a random element from an array.
+function getRandomString(array) {
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
 
 
 
@@ -537,6 +547,8 @@ function handleTrackingEvent (event) {
 
 // TIME OF LAST VISIT SAVED TO LOCAL STORAGE
 
+
+
 function saveLocal() {
 
     var memory;
@@ -578,11 +590,11 @@ function saveLocal() {
 
     // IF there hasn't been a visit (no previous memory/timeAway)
     if (daysAway == 0) {
-      console.log("Ooooohhhh a new person!");
+      console.log("-");
     }
     // ELSE IF not much time has passed
     else if (daysAway > 0) {
-      console.log("I love you so damn much.");
+      console.log("Thank you for visiting me, friend.");
       // $("body").append(happySquare());
     }
     // ELSE IF user has been gone for less than 1.5 days
