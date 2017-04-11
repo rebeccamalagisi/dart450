@@ -94,11 +94,11 @@ $(document).ready(function() {
     saveLocal();
 
     // IF the visit number is over 30, add the class to make the background change color
-    // && memory.lastVisit < 10000
+    // && memory.lastVisit < 10000 or && memory.lastVisit > 1000000
     if (memory.numVisits >= 30) {
-      $('body').addClass('thirty');
+      $('body').addClass('visit');
 
-      
+
 
     }
   }
@@ -525,6 +525,23 @@ function clearLocal(event) {
 
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

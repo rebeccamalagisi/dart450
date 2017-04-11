@@ -28,18 +28,32 @@ html, body {
 
 #info {
   font-family: 'Helvetica', sans-serif;
-  font-size: 20px;
-  line-height: 28px;
+
   position:absolute;
-  background-color: white;
+  background-color: rgba(255,255,255,0.6);
   /*border: solid 2px red;*/
   display: inline-block;
-  padding: 32px 60px;
-  text-align: center;
+  padding: 32px 48px;
+  /*text-align: center;*/
+  width: 500px;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
   display: none;
+
+}
+
+#info p {
+  font-size: 16px;
+  line-height: 24px;
+
+
+}
+
+#info h1 {
+  font-size: 20px;
+  line-height: 28px;
+
 
 }
 
@@ -105,14 +119,14 @@ video, canvas {
 
 /* =============== VISIT CLASS =============== */
 
-.thirty{
-  animation-name: thirty;
+.visit{
+  animation-name: visit;
   animation-duration: 60s;
   animation-iteration-count: infinite;
 
 }
 
-@keyframes thirty{
+@keyframes visit{
   0% {background-color: #cfffaf;}
   25% {background-color: #afebff;}
   50% {background-color: #b8afff;}
