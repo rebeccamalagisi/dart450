@@ -122,6 +122,8 @@ $(document).ready(function() {
 
 
 
+
+
     }
   }
   // ELSE the function is not called (if it's not between the specific times)
