@@ -47,6 +47,7 @@ html, body {
 #info p {
   font-size: 16px;
   line-height: 24px;
+  margin-bottom: 6px;
 
 
 }
@@ -54,6 +55,7 @@ html, body {
 #info h1 {
   font-size: 20px;
   line-height: 28px;
+  margin-bottom: 12px;
 
 
 }
@@ -99,7 +101,7 @@ html, body {
   background-color: black;
   height:32px;
   width:32px;
-  top:175px;
+  top:100px;
   left:20px;
 
 
@@ -112,7 +114,7 @@ html, body {
   background-color: black;
   height:32px;
   width:32px;
-  top:225px;
+  top:40px;
   left:20px;
 
 
@@ -138,6 +140,7 @@ video, canvas {
   animation-name: visit;
   animation-duration: 60s;
   animation-iteration-count: infinite;
+
 
 }
 

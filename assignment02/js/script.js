@@ -281,7 +281,7 @@ function drawLoop( time ) {
 
       // else the audio is good, make the audio square green
 			$("#audioDiv").css({
-				backgroundColor: "green"
+				backgroundColor: "limegreen"
 
 			});
 
@@ -376,9 +376,9 @@ function handleVideo(stream) {
 function videoError(e) {
   console.log("I can't see you...");
 
-  $('body').css({
-    'background-color': 'red'
-  })
+  // $('body').css({
+  //   'background-color': 'red'
+  // })
 }
 
 // startTracking()
@@ -424,9 +424,9 @@ function handleTrackingEvent (event) {
   if (event.data.length === 0 && faceDetected == true) {
     // No faces were detected in this frame.
 
-    // Therefore, make the video square pink since the site CANNOT see a face
+    // Therefore, make the video square gray since the site CANNOT see a face
     $("#videoDiv").css({
-      backgroundColor: "pink"
+      backgroundColor: "slategray"
 
     });
 
@@ -442,7 +442,7 @@ function handleTrackingEvent (event) {
 
     // Therefore, make the video square blue since the site CAN see a face
     $("#videoDiv").css({
-      backgroundColor: "blue"
+      backgroundColor: "dodgerblue"
 
     });
 
