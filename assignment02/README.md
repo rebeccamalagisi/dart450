@@ -7,8 +7,11 @@ By Rebecca Malagisi
 Personification is defined as “the attribution of a personal nature or human characteristics to something nonhuman, or the representation of an abstract quality in human form.” This theme, mainly seen throughout my education in literature, had been sparked when exploring concepts for this project.
 
 How can technology can be personified?
+
 How can technology feel?
+
 How can technology sense emotions and respond based on these feelings?
+
 At what point, if ever, does technology surpass the simulation of these emotions into a real, biological response?
 
 There’s the obvious sci-fi train of thought that is fueled from films like The Terminator and 2001: A Space Odyssey, which are rather ominous displays of emotional intelligence. However, through more realistic research, I was inspired by Edward Ihnatowicz’s “The Senster”, a bashful robot that would shy away from sudden movements or loud noises. I was also highly interested in David Hanson’s robots with perception of emotional state, one being his Einstein robot which was able to see faces and mimic user expressions.  Hanson’s robotics company also created a robot called Sophia, which was programmed to think, respond to and uphold conversation, as well as remember faces and conversations. Their goal was to have her be as conscious, creative, and capable as any human. In all these cases, the robots/technology are not living or breathing but simulating and mimicking a life source. The robots are programmed to feel emotions, and therefore are not truly feeling. However, as technological advancements in artificial intelligence are constantly improving, a future where technology can think and feel for itself is speculated.  Although we are not sure whether the artificial intelligence of the future will be malicious as seen in cult films, or passive and helpful, the personification of the nonhuman is being adopted in the assignment of human qualities.
