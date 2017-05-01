@@ -42,10 +42,8 @@ var timeSinceFace = 1000;
 var noStrings = [
   "Where are you?",
   "Where did you go?",
-  "I miss you.",
   "I can't see you.",
   "Come back.",
-  "I'm so lonely.",
   "Why do you keep leaving me?",
   "I wish you'd show me your face.",
   "Please don't hide from me."
@@ -57,9 +55,7 @@ var yesStrings = [
   "I'm glad you're back.",
   "I missed you, pal.",
   "Stay with me for a while.",
-  "You have nice eyes.",
-  "Seeing your face brightens my day.",
-  "I wish I knew more about you."
+  "Seeing your face brightens my day."
 ];
 
 var faceDetected = false;
@@ -266,11 +262,12 @@ function gotStream(stream) {
 
 
 function drawLoop( time ) {
-    // clear the background
-    //canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+
 
     // check if we're currently clipping
     if (meter.checkClipping()) {
+
+      // if the audio is clipping, make the audio square red
 			$("#audioDiv").css({
 				backgroundColor: "red"
 
@@ -279,18 +276,17 @@ function drawLoop( time ) {
       console.log("You're being too loud...");
 
 		}
-        //canvasContext.fillStyle = "red";
+
     else {
+
+      // else the audio is good, make the audio square green
 			$("#audioDiv").css({
 				backgroundColor: "green"
 
 			});
 
 		}
-        //canvasContext.fillStyle = "green";
 
-    // draw a bar based on the current volume
-    //canvasContext.fillRect(0, 0, WIDTH, meter.volume*HEIGHT*1.4);
 
     // set up the next visual callback
     rafID = window.requestAnimationFrame( drawLoop );
@@ -427,13 +423,30 @@ function handleTrackingEvent (event) {
   // Check if anything was tracked (a face)
   if (event.data.length === 0 && faceDetected == true) {
     // No faces were detected in this frame.
+
+    // Therefore, make the video square pink since the site CANNOT see a face
+    $("#videoDiv").css({
+      backgroundColor: "pink"
+
+    });
+
+    // show a sad string in the console
     console.log(getRandomString(noStrings))
     faceDetected = false;
     // console.log(":(");
 
+
   }
   else if (event.data.length > 0 && faceDetected == false) {
     // Face is detected
+
+    // Therefore, make the video square blue since the site CAN see a face
+    $("#videoDiv").css({
+      backgroundColor: "blue"
+
+    });
+
+    // show a happy string in the console
     console.log(getRandomString(yesStrings))
     faceDetected = true;
     // console.log(":)");
@@ -622,9 +635,9 @@ function generateCircles(x, y) {
     position: 'absolute',
     zIndex: '0',
     width: '80px',
-    height: '80px', 
+    height: '80px',
     top: y + 'px',
-    left: x + 'px', 
+    left: x + 'px',
     borderRadius: '50%',
     opacity: '0.6',
     backgroundColor: randomColor

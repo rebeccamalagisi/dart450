@@ -107,6 +107,19 @@ html, body {
 }
 
 
+#videoDiv {
+  position: absolute;
+  background-color: black;
+  height:32px;
+  width:32px;
+  top:225px;
+  left:20px;
+
+
+
+}
+
+
 video, canvas {
   position: absolute;
   /*top: 0;*/
@@ -115,6 +128,7 @@ video, canvas {
   left: 20px;
   margin: auto;
   z-index: -1; /* display video in back of lines */
+  visibility:hidden;
 }
 
 
