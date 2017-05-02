@@ -178,7 +178,7 @@ function isAwake () {
 
   // if the hour is between 10am and 6pm, the site is AWAKE (white background)
   // >= means greater than or equal to --- && means and --- <= means less than or equal to
-  if (theHour >= 8 && theHour <= 18){
+  if (theHour >= 10 && theHour <= 18){
     return true;
   }
 
