@@ -84,7 +84,7 @@ $(document).ready(function() {
   careInstructions();
 
   // Calling the clearLocal storage function with keypress = reseting memory
-  $("body").keypress(clearLocal);
+  // $("body").keypress(clearLocal);
 
 
   // Creating a variable for the isAwake() function
