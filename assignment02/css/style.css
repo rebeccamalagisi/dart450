@@ -157,7 +157,7 @@ video, canvas {
 
 .growUp {
   animation-name: scaling;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
 
 }
 
@@ -169,6 +169,8 @@ video, canvas {
 
 
 }
+
+
 
 
 /* =============== HAPPY / SAD METER =============== */

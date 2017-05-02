@@ -102,16 +102,18 @@ $(document).ready(function() {
     // Time saving to localStorage works
     saveLocal();
 
-    // IF the visit number is over 30, add the class to make the background change color
+    // IF the visit number is over 30
     // && memory.lastVisit < 10000 or && memory.lastVisit > 1000000
-    // var now = new Date();
-    // var nowMillis = now.getTime();
-    // var timeAway = nowMillis - memory.lastVisit;
+    var now = new Date();
+    var nowMillis = now.getTime();
+    var timeAway = nowMillis - memory.lastVisit;
     // && timeAway < 10000
 
-    if (memory.numVisits >= 30) {
+    if (memory.numVisits >= 30 && memory.lastVisit > 10000) {
+      // add the fun background class to change the color
       $('body').addClass('visit');
 
+      // Call the happy circle function
       soSoHappy();
 
 
@@ -569,13 +571,9 @@ function clearLocal(event) {
 
 ///////////////////////////////////////////////////////////////////////////
 
+// SOSOHAPPY FUNCTION !!!
+// draws and appends happy circles once the user reaches 30+ visits
 
-// function soSoHappy() {
-//
-//
-//
-//
-// }
 
 
 function soSoHappy() {
@@ -602,9 +600,21 @@ function soSoHappy() {
 
   }
 
+  // When the cursor touches a circle
   $('.circle').mouseover(function(){
-    // $(this).fadeOut(2000);
+    // Toggle the class .growUp to the circles, which animates them to grow in scale
     $(this).toggleClass('growUp');
+
+    // Also animate the circles to move position in the webpage
+    $(this).animate({
+        // screen height
+        top: Math.floor(Math.random() * 800) + "px",
+        // screen width
+        left: Math.floor(Math.random() * 1200) + "px"
+
+    // this animation will take 1.5 seconds
+    },1500);
+
 
 
   });
