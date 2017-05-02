@@ -102,14 +102,15 @@ $(document).ready(function() {
     // Time saving to localStorage works
     saveLocal();
 
-    // IF the visit number is over 30
-    // && memory.lastVisit < 10000 or && memory.lastVisit > 1000000
+
+    // Reiterate the date variables from the saveLocal function so that they can be used in another code
     var now = new Date();
     var nowMillis = now.getTime();
     var timeAway = nowMillis - memory.lastVisit;
-    // && timeAway < 10000
+    var daysAway = timeAway/1000/60/60/24;
 
-    if (memory.numVisits >= 30 && memory.lastVisit > 10000) {
+    // IF the visit number is over 30 && it has been less than 36 hours since the last visit
+    if (memory.numVisits >= 30 && daysAway < 1.5) {
       // add the fun background class to change the color
       $('body').addClass('visit');
 
@@ -117,13 +118,11 @@ $(document).ready(function() {
       soSoHappy();
 
 
-
-
-
-
-
     }
   }
+
+
+
   // ELSE the function is not called (if it's not between the specific times)
   else {
     // Set background to black
@@ -176,9 +175,9 @@ function isAwake () {
   // getHours will retrieve the hour from the computer (0-23 hours)
   // date.getHours --> date is the variable at the beginning of the doc to retrieve Date() data from the computer
 
-  // if the hour is between 10am and 8pm, the site is AWAKE (white background)
+  // if the hour is between 10am and 6pm, the site is AWAKE (white background)
   // >= means greater than or equal to --- && means and --- <= means less than or equal to
-  if (theHour >= 9 && theHour <= 23){
+  if (theHour >= 8 && theHour <= 18){
     return true;
   }
 
@@ -321,7 +320,7 @@ function setupVideo () {
 
 function webcamFeed (){
 
-  // variables
+  // video variables
   var video = document.getElementById('video');
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
@@ -512,10 +511,12 @@ function saveLocal() {
     // Calculate time since last visit as timeAway var
     var timeAway = nowMillis - memory.lastVisit;
     // Print this in the console
-    console.log("Time away: ",timeAway);
+    console.log("Time since last visit: ",timeAway);
 
     // Calculate days as milliseconds divided by 1000 (milliseconds/second) divided by 60 (seconds/minute) divided by 60 (minutes/hour) divided by 24 (hours/day)
     var daysAway = timeAway/1000/60/60/24;
+    // Print the amount of days in the console
+    console.log("Days since last visit: ",daysAway);
 
     // IF there hasn't been a visit (no previous memory/timeAway)
     if (daysAway == 0) {
@@ -608,9 +609,9 @@ function soSoHappy() {
     // Also animate the circles to move position in the webpage
     $(this).animate({
         // screen height
-        top: Math.floor(Math.random() * 800) + "px",
+        top: Math.floor(Math.random() * 760) + 'px',
         // screen width
-        left: Math.floor(Math.random() * 1200) + "px"
+        left: Math.floor(Math.random() * 1200) + 'px'
 
     // this animation will take 1.5 seconds
     },1500);
@@ -646,13 +647,13 @@ function generateCircles(x, y) {
     top: y + 'px',
     left: x + 'px',
     borderRadius: '50%',
-    opacity: '0.6',
+    opacity: '0.8',
     backgroundColor: randomColor
-    // backgroundColor: 'linear-gradient(45deg,' + randomColor + ',' + randomColor ')'
+    // background: 'linear-gradient(45deg,' + randomColor + ',' + randomColor ')'
 
   });
 
-  // Give me a div but don't show it on the webpage until I append it in the document.ready
+  // Give me a div but don't show it on the webpage until I append it
   return circleDiv;
 
 }
