@@ -3,7 +3,7 @@
 Assignment 02 - Personification of the web/Interactive personality
 Rebecca Malagisi
 
-Description of this script in the context of the project
+A shy, yet needy website that likes to interact with the user through a variety of js libraries.
 
 */
 
@@ -109,13 +109,14 @@ $(document).ready(function() {
     var timeAway = nowMillis - memory.lastVisit;
     var daysAway = timeAway/1000/60/60/24;
 
-    // IF the visit number is over 30 && it has been less than 36 hours since the last visit
-    if (memory.numVisits >= 30 && daysAway < 1.5) {
+    // IF the visit number is over 30 && it has been less than 24 hours since the last visit
+    if (memory.numVisits >= 30 && daysAway < 1) {
       // add the fun background class to change the color
       $('body').addClass('visit');
 
       // Call the happy circle function
       soSoHappy();
+      console.log("Play with me!");
 
 
     }
