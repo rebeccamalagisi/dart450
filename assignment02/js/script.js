@@ -67,7 +67,7 @@ var faceDetected = false;
 ///////////////////////////////////////////////////////////////////////////
 
 
-const NUMBER_OF_CIRCLES = 17;
+const NUMBER_OF_CIRCLES = 22;
 
 
 
@@ -112,7 +112,7 @@ $(document).ready(function() {
     if (memory.numVisits >= 30) {
       $('body').addClass('visit');
 
-      // soSoHappy();
+      soSoHappy();
 
 
 
@@ -424,9 +424,9 @@ function handleTrackingEvent (event) {
   if (event.data.length === 0 && faceDetected == true) {
     // No faces were detected in this frame.
 
-    // Therefore, make the video square gray since the site CANNOT see a face
+    // Therefore, make the video square gold since the site CANNOT see a face
     $("#videoDiv").css({
-      backgroundColor: "slategray"
+      backgroundColor: "gold"
 
     });
 
@@ -566,6 +566,7 @@ function clearLocal(event) {
 
 
 
+
 ///////////////////////////////////////////////////////////////////////////
 
 
@@ -575,7 +576,6 @@ function clearLocal(event) {
 //
 //
 // }
-
 
 
 function soSoHappy() {
@@ -602,15 +602,12 @@ function soSoHappy() {
 
   }
 
-  // $('.circle').hover(function){
-  //   $(this).animate({
-  //     'height': '+=20px',
-  //     'width': '+=20px',
-  //
-  //   });
-  //
-  //
-  // };
+  $('.circle').mouseover(function(){
+    // $(this).fadeOut(2000);
+    $(this).toggleClass('growUp');
+
+
+  });
 
 
 }
@@ -627,7 +624,7 @@ function generateCircles(x, y) {
 
   // Variables that will create the colors for the circles
 
-  var bgColor = ['cyan', 'green', 'yellow', 'orange', 'blue', 'purple', 'pink', 'magenta']
+  var bgColor = ['cyan', 'turquoise', 'greenyellow', 'chartreuse', 'yellow', 'rebeccapurple', 'purple', 'pink', 'magenta']
   var randomColor = bgColor[Math.floor(Math.random() * bgColor.length)];
 
   // Styling the circle divs using css
@@ -641,6 +638,7 @@ function generateCircles(x, y) {
     borderRadius: '50%',
     opacity: '0.6',
     backgroundColor: randomColor
+    // backgroundColor: 'linear-gradient(45deg,' + randomColor + ',' + randomColor ')'
 
   });
 
